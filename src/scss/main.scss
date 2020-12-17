@@ -130,7 +130,7 @@ section {
 
   .country-logo {
     @include size(24px, 24px);
-    background: center/contain url("US.svg") no-repeat;
+    background: center/contain url("assets/icons/US.svg") no-repeat;
   }
 
 }
