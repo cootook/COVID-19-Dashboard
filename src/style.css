@@ -321,6 +321,9 @@ section {
   .footer {
     flex-direction: column;
   }
+  .footer .rss-link {
+    background-color: #961414;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
