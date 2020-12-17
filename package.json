@@ -10,7 +10,8 @@
     "dev": "webpack-dev-server --history-api-fallback --inline --open",
     "build": "npm run clear -s && webpack --progress",
     "lint": "eslint ./**/*.js",
-    "clear": "del-cli dist"
+    "clear": "del-cli dist",
+    "sass": "sass --watch src/scss/main.scss:src/style.css"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
@@ -34,6 +35,7 @@
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.13.0",
     "postcss-loader": "^3.0.0",
+    "sass": "^1.30.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
