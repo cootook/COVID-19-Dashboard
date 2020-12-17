@@ -269,6 +269,9 @@ section {
   width: 100px;
   height: auto;
 }
+.footer .rss-link {
+  background-color: #961414;
+}
 
 ::-webkit-scrollbar {
   width: 4px;
@@ -320,9 +323,6 @@ section {
 
   .footer {
     flex-direction: column;
-  }
-  .footer .rss-link {
-    background-color: #961414;
   }
 }
 

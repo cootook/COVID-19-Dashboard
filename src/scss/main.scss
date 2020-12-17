@@ -165,6 +165,10 @@ section {
     @include size(100px, auto);
   }
 
+  .rss-link {
+    background-color: #961414;
+  }
+
 }
 
 ::-webkit-scrollbar {
@@ -243,9 +247,7 @@ section {
   .footer {
     flex-direction: column;
 
-    .rss-link {
-      background-color: #961414;
-    }
+
 
   }
 
