@@ -128,10 +128,202 @@ table {
   border-spacing: 0;
 }
 
+* {
+  position: static;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  user-select: none;
+  list-style: none;
+  text-decoration: none;
+}
+
 body {
-  background-color: black;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #121414;
+  color: #eee;
+  display: grid;
+  padding: 1em;
+  grid-template-rows: max-content repeat(3, 1fr) auto;
+  grid-template-columns: 1fr 3fr 2fr;
+  grid-gap: 1em;
+  grid-template-areas: "header header header" "info map table" "list map table" "list map graph" "list footer graph";
+}
+
+.header {
+  grid-area: header;
+  background-color: #1b1f22;
+  border: 1px solid rgba(56, 61, 68, 0.5);
+}
+.header h1 {
+  font-size: 3em;
+  text-align: center;
+  margin: 0.5em 0;
+}
+
+section {
+  background-color: #1b1f22;
+  border: 1px solid rgba(56, 61, 68, 0.5);
+}
+
+.info-container {
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.info-container span {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #961414;
+}
+
+.list-container {
+  grid-area: list;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: static;
+  margin: 0;
+  padding: 1em;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.list-container h2 {
+  font-size: 1em;
+  margin-bottom: 1em;
+  overflow-wrap: anywhere;
+}
+.list-container #search {
+  position: static;
+  margin: 0 0 1em 0;
+  padding: 0.5em;
+  width: 100%;
+}
+.list-container ul {
+  width: 100%;
+}
+.list-container li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.list-container li .number {
+  color: #961414;
+  font-weight: bold;
+}
+.list-container .country-logo {
+  width: 24px;
+  height: 24px;
+  background: center/contain url("assets/icons/US.svg") no-repeat;
+}
+
+.map-container {
+  grid-area: map;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-container {
+  grid-area: table;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.graph-container {
+  grid-area: graph;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  grid-area: footer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.footer a,
+.footer span {
+  position: static;
+  margin: 0;
+  padding: 0 1em 0;
+  color: #a3a3a3;
+}
+.footer img {
+  display: block;
+  width: 100px;
+  height: auto;
+}
+.footer .rss-link {
+  background-color: #961414;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #555;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #bdbdbd;
+}
+
+@media (max-width: 1400px) {
+  body {
+    grid-template-rows: max-content repeat(3, 1fr) auto;
+    grid-template-columns: 1.5fr 2fr 1.5fr;
+    grid-template-areas: "header header header" "info map table" "list map table" "list map graph" "list footer graph";
+  }
+}
+@media (max-width: 1024px) {
+  body {
+    grid-template-rows: max-content 1fr 500px 500px;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: "header header" "info map" "list map" "graph table" "graph table" "footer footer";
+  }
+}
+@media (max-width: 767.99px) {
+  body {
+    grid-template-rows: repeat(2, auto) repeat(4, 400px) auto;
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "info" "table" "map" "list" "graph" "footer";
+  }
+
+  .info-container {
+    padding: 1em;
+  }
+
+  .list-container li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
