@@ -1,6 +1,6 @@
 // store data from api
 const dataApiDiseaseSh = {
-  countries: null,
+  countries: null, // arr of unnamed obj
   // https://corona.lmao.ninja/v2/countries
   // {
   //   "updated":1608491985449,
@@ -35,7 +35,7 @@ const dataApiDiseaseSh = {
   //   "recoveredPerOneMillion":995.54,
   //   "criticalPerOneMillion":2.36
   // }
-  world: null,
+  world: null, // object as bellow
   // https://disease.sh/v3/covid-19/all?yesterday=false&twoDaysAgo=false&allowNull=true
   // {
   //   "updated": 1608494473388,
@@ -97,3 +97,5 @@ const dataApiDiseaseSh = {
   //   }
   // }
 }
+
+export default dataApiDiseaseSh;
