@@ -43,7 +43,7 @@ async function getDataFromApiStat() {
 
   async function getAll() {
     const res = arrOfSrc.map(el => new DataGetter(el[0], el[1]))
-    return res;
+    return res[length - 1];
   }
   const res = await getAll().then((r) => {
     const endGlobalTime = new Date();
