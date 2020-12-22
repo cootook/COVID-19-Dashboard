@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>COVID-19 dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
   <link rel="shortcut icon" href="./assets/icons/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -184,7 +185,9 @@
 </section>
 <section class="map-container" id="map-container">MAP</section>
 <section class="table-container" id="table-container">TABLE</section>
-<section class="graph-container" id="graph-container">GRAPH</section>
+<section class="graph-container" id="graph-container">
+    <canvas id="myChart" width="300" height="300"></canvas>
+</section>
 <footer class="footer">
     <a class="git-link__author" href="https://github.com/fomenko-o">github: fomenko-o</a>
     <a class="git-link__author" href="https://github.com/friedooo">github: friedooo</a>
