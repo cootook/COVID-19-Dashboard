@@ -20,18 +20,14 @@ async function getDataFromApiStat() {
   class DataGetter {
     constructor(whichData, url) {
       async function getIt() {
-        console.log(`start ${whichData}...`)
         try {
           let response = await fetch(url);
           let data = await response.json();
-          console.log(data)
           dataApiDiseaseSh[whichData] = data;
           return data;
         }
         catch (err) {
           console.error(`problems with API on ${whichData} `, err);
-        } finally {
-          console.log(`... end ${whichData}`)
         }
       }
 
@@ -43,11 +39,9 @@ async function getDataFromApiStat() {
 
   async function getAll() {
     const res = arrOfSrc.map(el => new DataGetter(el[0], el[1]))
-    console.log('get all func', res)
     return Promise.all(res);
   }
   const res = await getAll().then((r) => {
-    console.log('res of func get all, then', r)
     const endGlobalTime = new Date();
     const takeGlobalTime = endGlobalTime - startGlobalTime;
     console.log(`got data from API in ${takeGlobalTime}ms`);
