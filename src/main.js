@@ -2,19 +2,69 @@ import getDataFromApiStat from './scripts/get-data-from-api-stat.js'
 import dataApiDiseaseSh from './data/from-api-disease-sh.js';
 import Graph from './scripts/chart.js';
 
-const grafCovid = () => {
-  let x = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
-  let values = [10,9,8,7,6,5,4,3,2,1];
+const grafCovid = (dataObj) => {
+  let buttons = document.querySelectorAll('.graph-container__buttons > button');
+  let arrName = ['Cumulative Cases', 'Cumulative Deaths', 'Cumulative Recovers'];
+  let arrUrl = ['cases', 'deaths', 'recovered'];
+  let index = 0;
+
+  let values;
+  let data;
+  let x;
+
+  function dataHandler() {
+    data = dataObj[arrUrl[index]];
+    x = [];
+    values = [];
+    for (let elem in data) {
+      x.push(elem);
+      values.push(data[elem]);
+    }
+  }
+ 
+  dataHandler();
   let graph = new Graph();
   graph.initSize();
-  graph.createGraph(x, values, 'bar', 'daily cases');
+  graph.createGraph(x, values, 'line', arrName[index]);
+
+
+  function buttonHandler() {
+    document.querySelector('#myChart').innerHTML = '';
+
+    if (this.innerHTML === 'Next') {
+      index += 1;
+      if (index === arrName.length) {
+        index = 0;
+      }
+    }
+
+    if (this.innerHTML === 'Prev') {
+      index -= 1;
+      if (index === -1) {
+        index = arrName.length - 1;
+      }
+    }
+
+    document.querySelector('.graph-container__title').innerHTML = arrName[index];
+    
+    dataHandler();
+    let graph = new Graph();
+    graph.initSize();
+    graph.createGraph(x, values, 'line', arrName[index]);
+  }
+
+  buttons.forEach(e => {
+    e.addEventListener('click', buttonHandler);
+  })
+    
+ 
 }
 
 async function mainCovid() {
   // here put functions
   await getDataFromApiStat() // this must be before you take data from  {dataApiDiseaseSh}!
-  console.log('mainCovid --->  dataApiDiseaseSh', dataApiDiseaseSh)
-  grafCovid();
+  console.log('mainCovid --->  dataApiDiseaseSh', dataApiDiseaseSh.worldHistory)
+  await grafCovid(dataApiDiseaseSh.worldHistory);
 }
 
 mainCovid();

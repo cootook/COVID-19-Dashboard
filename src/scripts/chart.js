@@ -1,8 +1,10 @@
 export default class Graph {
     constructor() {
-        this.container = document.querySelector('.graph-container');
+        this.container = document.querySelector('.graph-container__content');
         this.canvas = document.getElementById('myChart');
         this.ctx = this.canvas.getContext('2d');
+        this.graphTitle = document.querySelector('.graph-container__title');
+
     }
 
     initSize() {
@@ -18,7 +20,6 @@ export default class Graph {
             for (let i = 0; i < values.length; i += 1) {
                 this.bgColorArr.push('rgba(54, 162, 235, 1)');
                 this.borderColorArr.push('rgba(255, 99, 132, 1)');
-
             }
 
         this.myChart = new Chart(this.ctx, {
@@ -35,6 +36,7 @@ export default class Graph {
                 }]
             },
             options: {
+                    maintainAspectRatio: false,
                 responsive: true,
                 legend: {
                    labels: {
@@ -51,7 +53,12 @@ export default class Graph {
                       },
                     callbacks: {
                       label: function(tooltipItem) {
-                        return tooltipItem.label, tooltipItem.value;
+                          let label = tooltipItem.label;
+                          let value = tooltipItem.value;
+                        //   if (value > 1000) {
+                        //       value = Math.floor(value/1000000) + 'M';
+                        //   }
+                        return label, value;
                     }
                   }
                 },

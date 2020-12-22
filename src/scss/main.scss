@@ -148,6 +148,31 @@ section {
 .graph-container {
   grid-area: graph;
   @include flex(column, center, center);
+
+  .graph-container__content {
+    width: 100%;
+    height: 90%;
+  }
+  
+  .graph-container__buttons {
+    width: 100%;
+    height: 10%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      width: 100px;
+      height: 30px;
+    }
+
+    .graph-container__title {
+      color: white;
+    }
+
+  }
+
 }
 
 .footer {
