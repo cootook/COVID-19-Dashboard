@@ -102,6 +102,12 @@ section {
   overflow: hidden;
   overflow-y: scroll;
 
+  .list-container--heading {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
   h2 {
     font-size: 1em;
     margin-bottom: 1em;
