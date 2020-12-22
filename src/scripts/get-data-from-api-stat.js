@@ -43,16 +43,14 @@ async function getDataFromApiStat() {
 
   async function getAll() {
     const res = arrOfSrc.map(el => new DataGetter(el[0], el[1]))
-    return res[length - 1];
+    console.log('get all func', res)
+    return Promise.all(res);
   }
   const res = await getAll().then((r) => {
+    console.log('res of func get all, then', r)
     const endGlobalTime = new Date();
     const takeGlobalTime = endGlobalTime - startGlobalTime;
-    console.log(`the whole func took ${takeGlobalTime}ms`);
-    // console.log('countries', dataApiDiseaseSh.countries)
-    // console.log('world', dataApiDiseaseSh.world)
-    // console.log('countriesHistory', dataApiDiseaseSh.countriesHistory)
-    // console.log('worldHistory', dataApiDiseaseSh.worldHistory)
+    console.log(`got data from API in ${takeGlobalTime}ms`);
     return r;
   });
 
