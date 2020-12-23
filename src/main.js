@@ -3,9 +3,7 @@ import dataApiDiseaseSh from './data/from-api-disease-sh.js';
 import Graph from './scripts/chart.js';
 import Map from './scripts/map.js';
 
-let mode = 'cases';
-
-mode = {
+let mode = {
   mainInfo: ['cases','deaths','recovered'],
   timeInterval: ['all','today'],
   mainAmount: ['all', 'per100K']
