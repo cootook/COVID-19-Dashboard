@@ -18,7 +18,7 @@ async function mainCovid() {
   grafCovid();
   const list = new generateListFlagCountryCases();
   list.appendAll()
-  list.sortList()
+  //list.sortListByCases()
 }
 
 mainCovid();

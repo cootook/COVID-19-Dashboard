@@ -4,6 +4,8 @@ export default class generateListFlagCountryCases {
 
   constructor() {
     const { countries } = dataApiDiseaseSh;
+    generateListFlagCountryCases.prototype.sortedByCases = '1-2'
+    generateListFlagCountryCases.prototype.sortedByCountries = 'a-b'
 
 
 
@@ -12,11 +14,18 @@ export default class generateListFlagCountryCases {
     listHeadingSorBy.innerText = 'Sort by '
     const listHeadingCountry = document.createElement('div')
     listHeadingCountry.innerText = 'country'
+    listHeadingCountry.addEventListener('click', this.sortListByCountries)
     const listHeadingCases = document.createElement('div')
+    listHeadingCases.style.display = 'flex'
     listHeadingCases.innerText = 'cases'
+    const btnSortedByCases = document.createElement('span')
+    btnSortedByCases.classList.add('list-container--btn__sort-by-cases')
+    btnSortedByCases.innerText = ' ^ '
+    listHeadingCases.addEventListener('click', this.sortListByCases)
     this.listHeading.appendChild(listHeadingSorBy)
     this.listHeading.appendChild(listHeadingCountry)
     this.listHeading.appendChild(listHeadingCases)
+    listHeadingCases.appendChild(btnSortedByCases)
     this.listHeading.classList.add('list-container--heading')
 
     this.listInputSearch = document.createElement('input')
@@ -78,6 +87,8 @@ export default class generateListFlagCountryCases {
       listCountryCase.classList.add('number')
       listCountryCase.innerText = cases
 
+
+
       listLi.appendChild(countryLogo)
       listLi.appendChild(listCountryName)
       listLi.appendChild(listCountryCase)
@@ -85,10 +96,6 @@ export default class generateListFlagCountryCases {
 
       return listLi;
     });
-
-
-
-
   }
 
   appendAll() {
@@ -98,19 +105,58 @@ export default class generateListFlagCountryCases {
     listContainer.appendChild(this.listUl)
   }
 
-  sortList() {
+  sortListByCases() {
+    console.log('sortListByCases()...')
+    const btnSort = document.querySelector('.list-container--btn__sort-by-cases')
+    const listContainer = document.querySelector('.list-container')
+    const arrList = document.querySelectorAll('.list-container--ul__item')
+    btnSort.classList.toggle('list-container--btn__sort-by-cases--up')
+    arrList.forEach(x => {
+      x.remove()
+    })
+    const temp = Array.prototype.slice.call(arrList, 0)
+
+    if (generateListFlagCountryCases.prototype.sortedByCases === '2-1') {
+      generateListFlagCountryCases.prototype.sortedByCases = '1-2'
+      temp.sort((x, y) => Number(x.dataset.cases) - Number(y.dataset.cases))
+    } else {
+      generateListFlagCountryCases.prototype.sortedByCases = '2-1'
+      temp.sort((x, y) => Number(y.dataset.cases) - Number(x.dataset.cases))
+    }
+    temp.forEach(x => {
+      listContainer.appendChild(x)
+    })
+  }
+
+  sortListByCountries() {
+    console.log('sortListByCountries()...')
     const listContainer = document.querySelector('.list-container')
     const arrList = document.querySelectorAll('.list-container--ul__item')
     arrList.forEach(x => {
       x.remove()
-      console.log(Number(x.dataset.cases))
     })
     const temp = Array.prototype.slice.call(arrList, 0)
-    temp.sort((x, y) => {
-      //return Number(x.dataset.cases) - Number(y.dataset.cases)
-      return Number(y.dataset.cases) - Number(x.dataset.cases)
 
-    })
+    if (generateListFlagCountryCases.prototype.sortedByCountries === 'a-b') {
+      generateListFlagCountryCases.prototype.sortedByCountries = 'b-a'
+      console.log('a-b')
+      temp.sort((x, y) => {
+
+        const xCountry = x.dataset.country.toLowerCase()
+        const yCountry = y.dataset.country.toLowerCase()
+        if (xCountry < yCountry) return -1
+        else return 1
+      })
+    } else {
+      generateListFlagCountryCases.prototype.sortedByCountries = 'a-b'
+      console.log('b-a')
+      temp.sort((x, y) => {
+        const xCountry = x.dataset.country.toLowerCase()
+        const yCountry = y.dataset.country.toLowerCase()
+        if (xCountry > yCountry) return -1
+        else return 1
+      })
+    }
     temp.forEach(x => {
       listContainer.appendChild(x)
     })
