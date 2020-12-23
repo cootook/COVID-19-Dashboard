@@ -254,6 +254,24 @@ section {
   align-items: center;
   justify-content: center;
 }
+.graph-container .graph-container__content {
+  width: 100%;
+  height: 90%;
+}
+.graph-container .graph-container__buttons {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.graph-container .graph-container__buttons button {
+  width: 100px;
+  height: 30px;
+}
+.graph-container .graph-container__buttons .graph-container__title {
+  color: white;
+}
 
 .footer {
   grid-area: footer;
