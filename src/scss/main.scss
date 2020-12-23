@@ -35,6 +35,8 @@ $main-transition: all 0.3s ease;
   height: $height;
 }
 
+@import 'map.scss';
+
 * {
   @include position(static, 0, 0);
   box-sizing: border-box;
@@ -137,7 +139,7 @@ section {
 
 .map-container {
   grid-area: map;
-  @include flex(column, center, center);
+  @include flex(column, center, space-between);
 }
 
 .table-container {

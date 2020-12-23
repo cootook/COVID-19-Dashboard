@@ -128,6 +128,27 @@ table {
   border-spacing: 0;
 }
 
+#map {
+  width: 100%;
+  height: calc(100% - 30px);
+}
+
+.marker {
+  background-color: #961414;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.mapboxgl-popup {
+  max-width: 240px;
+}
+
+.mapboxgl-popup-content {
+  color: black;
+  text-align: center;
+  padding: 1em;
+}
+
 * {
   position: static;
   margin: 0;
@@ -231,7 +252,7 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .table-container {

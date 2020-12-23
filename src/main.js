@@ -1,6 +1,7 @@
 import getDataFromApiStat from './scripts/get-data-from-api-stat.js'
 import dataApiDiseaseSh from './data/from-api-disease-sh.js';
 import Graph from './scripts/chart.js';
+import Map from './scripts/map.js';
 
 const grafCovid = () => {
   let x = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
@@ -13,7 +14,8 @@ const grafCovid = () => {
 async function mainCovid() {
   // here put functions
   await getDataFromApiStat() // this must be before you take data from  {dataApiDiseaseSh}!
-  console.log('mainCovid --->  dataApiDiseaseSh', dataApiDiseaseSh)
+  console.log('mainCovid --->  dataApiDiseaseSh', dataApiDiseaseSh);
+  new Map(dataApiDiseaseSh).renderMap();
   grafCovid();
 }
 
