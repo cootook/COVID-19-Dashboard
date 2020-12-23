@@ -5,6 +5,12 @@ import Map from './scripts/map.js';
 
 let mode = 'cases';
 
+mode = {
+  mainInfo: ['cases','deaths','recovered'],
+  timeInterval: ['all','today'],
+  mainAmount: ['all', 'per100K']
+}
+
 const grafCovid = () => {
   let x = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
   let values = [10,9,8,7,6,5,4,3,2,1];
@@ -21,16 +27,13 @@ async function mainCovid() {
   grafCovid();
 
   document.body.querySelector('.btn-cases').addEventListener('click', ()=> {
-    mode = 'cases';
-    new Map(dataApiDiseaseSh).renderMap(mode);
+    new Map(dataApiDiseaseSh).renderMap(mode.mainInfo[0]);
   });
   document.body.querySelector('.btn-deaths').addEventListener('click', ()=> {
-    mode = 'deaths';
-    new Map(dataApiDiseaseSh).renderMap(mode);
+    new Map(dataApiDiseaseSh).renderMap(mode.mainInfo[1]);
   });
   document.body.querySelector('.btn-recovered').addEventListener('click', ()=> {
-    mode = 'recovered';
-    new Map(dataApiDiseaseSh).renderMap(mode);
+    new Map(dataApiDiseaseSh).renderMap(mode.mainInfo[2]);
   });
 }
 

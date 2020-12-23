@@ -13,54 +13,75 @@ export default class Map {
     });
 
     let features = [];
-    let arrOfCases = [];
-    let pointSize;
-    let color = '#941414';
-    if(mode === 'deaths'){color = '#e7ba26';} else if(mode === 'recovered'){
-      color = '#017767';
-    } else {color = '#941414'};
-    for(let i = 0; i < this.countriesNumber; i++){
-      let cas = this.data[i].cases;
-      arrOfCases.push(cas);
+    let dataList = [];
+    let pointSize = "10px";
+    let pointColor = "#941414";
+
+    for (let i = 0; i < this.countriesNumber; i++) {
+      let dataItem;
+      if (mode === "deaths") {
+        dataItem = this.data[i].deaths;
+      } else if (mode === "recovered") {
+        dataItem = this.data[i].recovered;
+      } else {
+        dataItem = this.data[i].cases;
+      }
+      dataList.push(dataItem);
     }
 
-    let sum = arrOfCases.reduce(function(previousValue, currentValue) {
-      return previousValue + currentValue;
+    let allData = dataList.reduce(function (sum, item) {
+      return sum + item;
     });
-    let mid = sum/arrOfCases.length;
 
-    for(let i = 0; i < this.countriesNumber; i++){
-      if(this.data[i].cases > mid*10){
-        pointSize = '45px';
-      } else if (this.data[i].cases > mid*8){
-        pointSize = '40px';
-      } else if (this.data[i].cases > mid*6){
-        pointSize = '35px';
-      } else if (this.data[i].cases > mid*4){
-        pointSize = '30px';
-      } else if (this.data[i].cases > mid*2){
-        pointSize = '25px';
-      } else if (this.data[i].cases > mid*1){
-        pointSize = '20px';
-      } else if (this.data[i].cases > mid*0.5){
-        pointSize = '15px';
+    let medianNumber = allData / dataList.length;
+
+    for (let i = 0; i < this.countriesNumber; i++) {
+      let dataItem;
+      if (mode === "deaths") {
+        dataItem = this.data[i].deaths;
+        pointColor = "#e7ba26";
+      } else if (mode === "recovered") {
+        dataItem = this.data[i].recovered;
+        pointColor = "#017767";
       } else {
-        pointSize = '10px';
-      };
-      
-      let obj = {
+        dataItem = this.data[i].cases;
+        pointColor = "#941414";
+      }
+      if (dataItem > medianNumber * 10) {
+        pointSize = "45px";
+      } else if (dataItem > medianNumber * 8) {
+        pointSize = "40px";
+      } else if (dataItem > medianNumber * 6) {
+        pointSize = "35px";
+      } else if (dataItem > medianNumber * 4) {
+        pointSize = "30px";
+      } else if (dataItem > medianNumber * 2) {
+        pointSize = "25px";
+      } else if (dataItem > medianNumber * 1) {
+        pointSize = "20px";
+      } else if (dataItem > medianNumber * 0.5) {
+        pointSize = "15px";
+      } else {
+        pointSize = "10px";
+      }
+
+      let featuresItem = {
         type: "Feature",
         geometry: {
           type: "Point",
           size: pointSize,
-          coordinates: [this.data[i].countryInfo.long, this.data[i].countryInfo.lat],
+          color: pointColor,
+          coordinates: [
+            this.data[i].countryInfo.long,
+            this.data[i].countryInfo.lat,
+          ],
         },
         properties: {
           title: this.data[i].country,
-          description: `Cases: ${this.data[i].cases}`,
+          value: `${mode}: ${dataItem}`,
         },
       };
-      features.push(obj);
+      features.push(featuresItem);
     }
 
     let geojson = {
@@ -73,26 +94,21 @@ export default class Map {
       el.className = "marker";
       el.style.width = marker.geometry.size;
       el.style.height = marker.geometry.size;
-      el.style.backgroundColor = color;
-      el.style.boxShadow = `0px 0px 5px 0px ${color}`;
+      el.style.backgroundColor = marker.geometry.color;
+      el.style.boxShadow = `0px 0px 5px 0px ${marker.geometry.color}`;
 
       new mapboxgl.Marker(el)
-      .setLngLat(marker.geometry.coordinates)
+        .setLngLat(marker.geometry.coordinates)
         .setPopup(
           new mapboxgl.Popup({ offset: 25 }).setHTML(
             "<h3>" +
               marker.properties.title +
               "</h3><p>" +
-              marker.properties.description +
+              marker.properties.value +
               "</p>"
           )
         )
         .addTo(map);
     });
-
-  }
-
-  showLong() {
-    alert(this.data.countries[10].countryInfo.long);
   }
 }
