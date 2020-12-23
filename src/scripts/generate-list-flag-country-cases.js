@@ -1,76 +1,120 @@
 import dataApiDiseaseSh from '../data/from-api-disease-sh.js';
 
-export default function generateListFlagCountryCases() {
-  // <section class="list-container" id="list-container">
-  //   <h2  class="list-container--heading">Country Cases</h2>
-  //   <input type="search" name="search" id="search" placeholder="Search by Country">
-  //   <ul>
-  //       <li>
-  //           <div class="country-logo"></div>
-  //           <span class="country-name">Country1</span><span class="number">12 345 678</span>
-  //       </li>
-  //       <li>
-  //           <div class="country-logo"></div>
-  //           <span class="country-name">Country2</span><span class="number">12 345 678</span>
-  const { countries } = dataApiDiseaseSh;
+export default class generateListFlagCountryCases {
 
-  const listContainer = document.querySelector('.list-container')
+  constructor() {
+    const { countries } = dataApiDiseaseSh;
 
-  const listHeading = document.createElement('h2')
-  const listHeadingSorBy = document.createElement('div')
-  const listHeadingCountry = document.createElement('div')
-  const listHeadingCases = document.createElement('div')
-  listHeading.appendChild(listHeadingSorBy)
-  listHeading.appendChild(listHeadingCountry)
-  listHeading.appendChild(listHeadingCases)
-  listHeading.classList.add('list-container--heading')
 
-  const listInputSearch = document.createElement('input')
-  const listUl = document.createElement('ul') // use as a container for the list
 
-  countries.map((item) => {
-    {
+    this.listHeading = document.createElement('h2')
+    const listHeadingSorBy = document.createElement('div')
+    listHeadingSorBy.innerText = 'Sort by '
+    const listHeadingCountry = document.createElement('div')
+    listHeadingCountry.innerText = 'country'
+    const listHeadingCases = document.createElement('div')
+    listHeadingCases.innerText = 'cases'
+    this.listHeading.appendChild(listHeadingSorBy)
+    this.listHeading.appendChild(listHeadingCountry)
+    this.listHeading.appendChild(listHeadingCases)
+    this.listHeading.classList.add('list-container--heading')
 
-      //   "country":"Afghanistan",
-      //   "countryInfo":
-      //     {
-      //       "flag":"https://disease.sh/assets/img/flags/af.png"
-      //     },
-      //   "cases":50677,
-      //   "todayCases":141,
-      //   "deaths":2110,
-      //   "todayDeaths":56,
-      //   "recovered":39158,
-      //   "todayRecovered":359,
-      //   "casesPerOneMillion":1288,
-      //   "deathsPerOneMillion":54,
-      //   "recoveredPerOneMillion":995.54,
-      //   "population":39333612,
-    }
-    const {
-      country,
-      cases,
-      todayCases,
-      deaths,
-      todayDeaths,
-      recovered,
-      todayRecovered,
-      casesPerOneMillion,
-      deathsPerOneMillion,
-      recoveredPerOneMillion,
-      population
-    } = item
-    const flag = item.countryInfo.flag;
+    this.listInputSearch = document.createElement('input')
+    this.listInputSearch.classList.add('list-container--search')
+    this.listInputSearch.setAttribute('type', 'search')
+    this.listInputSearch.setAttribute('name', 'search')
+    this.listInputSearch.setAttribute('placeholder', 'Search by Country')
 
-  });
+    this.listUl = document.createElement('ul') // use as a container for the list
 
-  const listLi = document.createElement('li')
-  const countryLogo = document.createElement('div')
-  const listCountryName = document.createElement('span')
-  const listCountryCase = document.createElement('span')
+    this.arrListOfCountries = countries.map((item) => {
+      {
 
-  listContainer.appendChild(listHeading)
-  listContainer.appendChild(listInputSearch)
-  listContainer.appendChild(listUl)
+        //   "country":"Afghanistan",
+        //   "countryInfo":
+        //     {
+        //       "flag":"https://disease.sh/assets/img/flags/af.png"
+        //     },
+        //   "cases":50677,
+        //   "todayCases":141,
+        //   "deaths":2110,
+        //   "todayDeaths":56,
+        //   "recovered":39158,
+        //   "todayRecovered":359,
+        //   "casesPerOneMillion":1288,
+        //   "deathsPerOneMillion":54,
+        //   "recoveredPerOneMillion":995.54,
+        //   "population":39333612,
+      }
+      const {
+        country,
+        cases,
+        todayCases,
+        deaths,
+        todayDeaths,
+        recovered,
+        todayRecovered,
+        casesPerOneMillion,
+        deathsPerOneMillion,
+        recoveredPerOneMillion,
+        population
+      } = item
+      const flag = item.countryInfo.flag;
+
+      const listLi = document.createElement('li')
+      listLi.classList.add('list-container--ul__item')
+      listLi.dataset.country = country
+      listLi.dataset.cases = cases
+
+      const countryLogo = document.createElement('div')
+      countryLogo.classList.add('country-logo')
+      countryLogo.style.background = `center/contain url(${flag}) no-repeat`
+
+      const listCountryName = document.createElement('span')
+      listCountryName.classList.add('country-name')
+      listCountryName.innerText = country
+
+      const listCountryCase = document.createElement('span')
+      listCountryCase.classList.add('number')
+      listCountryCase.innerText = cases
+
+      listLi.appendChild(countryLogo)
+      listLi.appendChild(listCountryName)
+      listLi.appendChild(listCountryCase)
+      this.listUl.appendChild(listLi)
+
+      return listLi;
+    });
+
+
+
+
+  }
+
+  appendAll() {
+    const listContainer = document.querySelector('.list-container')
+    listContainer.appendChild(this.listHeading)
+    listContainer.appendChild(this.listInputSearch)
+    listContainer.appendChild(this.listUl)
+  }
+
+  sortList() {
+    const listContainer = document.querySelector('.list-container')
+    const arrList = document.querySelectorAll('.list-container--ul__item')
+    arrList.forEach(x => {
+      x.remove()
+      console.log(Number(x.dataset.cases))
+    })
+    const temp = Array.prototype.slice.call(arrList, 0)
+    temp.sort((x, y) => {
+      //return Number(x.dataset.cases) - Number(y.dataset.cases)
+      return Number(y.dataset.cases) - Number(x.dataset.cases)
+
+    })
+    temp.forEach(x => {
+      listContainer.appendChild(x)
+    })
+  }
+
 
 }
