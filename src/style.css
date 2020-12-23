@@ -205,6 +205,13 @@ section {
   margin-bottom: 1em;
   overflow-wrap: anywhere;
 }
+.list-container .list-container--btn__sort-by-cases {
+  display: block;
+  transition: 0.5s;
+}
+.list-container .list-container--btn__sort-by-cases--up {
+  transform: rotate(180deg);
+}
 .list-container #search {
   position: static;
   margin: 0 0 1em 0;

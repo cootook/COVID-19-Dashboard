@@ -116,6 +116,16 @@ section {
     overflow-wrap: anywhere;
   }
 
+  .list-container--btn__sort-by-cases {
+    display: block;
+    transition: .5s;
+  }
+
+  .list-container--btn__sort-by-cases--up {
+    transform: rotate(180deg);
+  }
+
+
   #search {
     @include position(static, 0 0 1em 0, 0.5em);
     width: 100%;
@@ -163,7 +173,7 @@ section {
     width: 100%;
     height: 90%;
   }
-  
+
   .graph-container__buttons {
     width: 100%;
     height: 10%;
