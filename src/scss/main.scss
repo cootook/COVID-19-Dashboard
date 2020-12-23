@@ -3,9 +3,9 @@
 // colors
 $bg-color: #121414;
 $section-bg-color: #1b1f22;
-$main-red: #961414; //all
+$main-red: #941414; //all
 $main-green: #017767; //recovered
-$main-yellow: rgb(231, 186, 38); //deaths
+$main-yellow: #e7ba26; //deaths
 $main-blue: rgb(18, 123, 192);
 $text-color: #eee;
 $link-color: #a3a3a3;
@@ -34,6 +34,9 @@ $main-transition: all 0.3s ease;
   width: $width;
   height: $height;
 }
+
+@import 'map.scss';
+
 
 * {
   @include position(static, 0, 0);
@@ -95,6 +98,8 @@ section {
 
 }
 
+
+
 .list-container {
   grid-area: list;
   @include flex(column, flex-start, flex-start);
@@ -102,11 +107,27 @@ section {
   overflow: hidden;
   overflow-y: scroll;
 
+  .list-container--heading {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
   h2 {
     font-size: 1em;
     margin-bottom: 1em;
     overflow-wrap: anywhere;
   }
+
+  .list-container--btn__sort-by-cases {
+    display: block;
+    transition: .5s;
+  }
+
+  .list-container--btn__sort-by-cases--up {
+    transform: rotate(180deg);
+  }
+
 
   #search {
     @include position(static, 0 0 1em 0, 0.5em);
@@ -117,9 +138,11 @@ section {
     width: 100%;
   }
 
+
   li {
     @include flex(row, center, space-between);
     flex-wrap: wrap;
+    width: 100%;
 
     .number {
       color: $main-red;
@@ -130,14 +153,14 @@ section {
 
   .country-logo {
     @include size(24px, 24px);
-    background: center/contain url("assets/icons/US.svg") no-repeat;
+    // background: center/contain url("assets/icons/US.svg") no-repeat;
   }
 
 }
 
 .map-container {
   grid-area: map;
-  @include flex(column, center, center);
+  @include flex(column, center, space-between);
 }
 
 .table-container {
@@ -153,7 +176,7 @@ section {
     width: 100%;
     height: 90%;
   }
-  
+
   .graph-container__buttons {
     width: 100%;
     height: 10%;
