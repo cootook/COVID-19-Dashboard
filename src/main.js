@@ -1,6 +1,6 @@
 import getDataFromApiStat from './scripts/get-data-from-api-stat.js'
 import dataApiDiseaseSh from './data/from-api-disease-sh.js';
-import grafCovid from './scripts/graph.js'; это из твоего варианта, у нас есть уже
+import grafCovid from './scripts/graph.js';
 import generateListFlagCountryCases from './scripts/generate-list-flag-country-cases.js'
 import Map from './scripts/map.js';
 
