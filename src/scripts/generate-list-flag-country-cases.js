@@ -14,9 +14,11 @@ export default class generateListFlagCountryCases {
     listHeadingSorBy.innerText = 'Sort by '
     const listHeadingCountry = document.createElement('div')
     listHeadingCountry.innerText = 'country'
+    listHeadingCountry.style.cursor = 'pointer'
     listHeadingCountry.addEventListener('click', this.sortListByCountries)
     const listHeadingCases = document.createElement('div')
     listHeadingCases.style.display = 'flex'
+    listHeadingCases.style.cursor = 'pointer'
     listHeadingCases.innerText = 'cases'
     const btnSortedByCases = document.createElement('span')
     btnSortedByCases.classList.add('list-container--btn__sort-by-cases')
@@ -106,7 +108,6 @@ export default class generateListFlagCountryCases {
   }
 
   sortListByCases() {
-    console.log('sortListByCases()...')
     const btnSort = document.querySelector('.list-container--btn__sort-by-cases')
     const listContainer = document.querySelector('.list-container')
     const arrList = document.querySelectorAll('.list-container--ul__item')
@@ -129,7 +130,6 @@ export default class generateListFlagCountryCases {
   }
 
   sortListByCountries() {
-    console.log('sortListByCountries()...')
     const listContainer = document.querySelector('.list-container')
     const arrList = document.querySelectorAll('.list-container--ul__item')
     arrList.forEach(x => {
@@ -139,7 +139,6 @@ export default class generateListFlagCountryCases {
 
     if (generateListFlagCountryCases.prototype.sortedByCountries === 'a-b') {
       generateListFlagCountryCases.prototype.sortedByCountries = 'b-a'
-      console.log('a-b')
       temp.sort((x, y) => {
 
         const xCountry = x.dataset.country.toLowerCase()
@@ -149,7 +148,6 @@ export default class generateListFlagCountryCases {
       })
     } else {
       generateListFlagCountryCases.prototype.sortedByCountries = 'a-b'
-      console.log('b-a')
       temp.sort((x, y) => {
         const xCountry = x.dataset.country.toLowerCase()
         const yCountry = y.dataset.country.toLowerCase()
