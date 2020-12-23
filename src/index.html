@@ -6,6 +6,7 @@
   <title>COVID-19 dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
   <link rel="shortcut icon" href="./assets/icons/favicon.ico" type="image/x-icon">
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,7 +20,19 @@
 </section>
 <section class="list-container" id="list-container">  
 </section>
-<section class="map-container" id="map-container">MAP</section>
+<!-- Этот блок был изменен при ркшении конфликта -->
+    <section class="map-container" id="map-container">
+      <div id="map"></div>
+      <div class="buttons-container">
+        <button class="btn btn-cases">Cases</button>
+        <button class="btn btn-deaths">Deaths</button>
+        <button class="btn btn-recovered">Recovered</button>
+      </div>
+      <div class="radio-container">
+
+      </div>
+    </section>
+<!-- ------------------------------------------ -->
 <section class="table-container" id="table-container">TABLE</section>
 <section class="graph-container" id="graph-container">
     <div class="graph-container__content">
@@ -38,6 +51,7 @@
     <span>2020</span>
     <a class="rss-link" href="https://rs.school/js/"><img src="https://rs.school/images/rs_school_js.svg" alt="rs.school"></a>
 </footer>
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js"></script>
   <script type="module" src="main.js"></script>
 </body>
 </html>
