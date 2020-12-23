@@ -14,6 +14,13 @@ export default class Graph {
         this.canvas.height = this.height + 'px';
     }
 
+    update() {
+        if (this.myChart) {
+            this.myChart.destroy();
+        }
+    }
+
+
     createGraph(labelX, values, type, legend) {
             this.bgColorArr = [];
             this.borderColorArr = [];
@@ -22,6 +29,7 @@ export default class Graph {
                 this.borderColorArr.push('rgba(255, 99, 132, 1)');
             }
 
+    
         this.myChart = new Chart(this.ctx, {
             type: type,
             data: {
@@ -38,13 +46,14 @@ export default class Graph {
             options: {
                     maintainAspectRatio: false,
                 responsive: true,
-                legend: {
-                   labels: {
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif',
-                    fontColor: 'white',
-                    boxWidth: 0,
-                  }
-                },
+                // legend: {
+                //    labels: {
+                //     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif',
+                //     fontColor: 'white',
+                //     boxWidth: 0,
+                //   }
+                // },
+                legend: false,
                 tooltips: {
                     custom: function(tooltip) {
                         if (!tooltip) return;
