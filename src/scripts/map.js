@@ -4,7 +4,7 @@ export default class Map {
     this.countriesNumber = this.data.length;
   }
 
-  renderMap() {
+  renderMap(mode) {
     mapboxgl.accessToken =
       "pk.eyJ1IjoicGxhbnNoaWJhIiwiYSI6ImNrMWFtY3R6NTAwOHUzbXA1Y2h1ZnpqemsifQ.DcipLDMfbBNnNm4JNik_lQ";
     let map = new mapboxgl.Map({
@@ -15,32 +15,39 @@ export default class Map {
     let features = [];
     let arrOfCases = [];
     let pointSize;
+    let color = '#941414';
+    if(mode === 'deaths'){color = '#e7ba26';} else if(mode === 'recovered'){
+      color = '#017767';
+    } else {color = '#941414'};
     for(let i = 0; i < this.countriesNumber; i++){
       let cas = this.data[i].cases;
       arrOfCases.push(cas);
     }
 
-    arrOfCases.sort(function(a, b) {
-      return a - b;
+    let sum = arrOfCases.reduce(function(previousValue, currentValue) {
+      return previousValue + currentValue;
     });
-    alert(arrOfCases);
-    let mid = arrOfCases[arrOfCases.length/2];
-    alert(mid);
+    let mid = sum/arrOfCases.length;
 
     for(let i = 0; i < this.countriesNumber; i++){
-      if(this.data[i].cases > mid*50){
+      if(this.data[i].cases > mid*10){
+        pointSize = '45px';
+      } else if (this.data[i].cases > mid*8){
+        pointSize = '40px';
+      } else if (this.data[i].cases > mid*6){
+        pointSize = '35px';
+      } else if (this.data[i].cases > mid*4){
+        pointSize = '30px';
+      } else if (this.data[i].cases > mid*2){
+        pointSize = '25px';
+      } else if (this.data[i].cases > mid*1){
         pointSize = '20px';
-      } else if (this.data[i].cases > mid*30){
+      } else if (this.data[i].cases > mid*0.5){
         pointSize = '15px';
-      } else if (this.data[i].cases > mid*20){
+      } else {
         pointSize = '10px';
-      } else if (this.data[i].cases > mid*10){
-        pointSize = '5px';
-      } else if (this.data[i].cases > mid*5){
-        pointSize = '2px';
       };
       
-      console.log(pointSize);
       let obj = {
         type: "Feature",
         geometry: {
@@ -66,6 +73,8 @@ export default class Map {
       el.className = "marker";
       el.style.width = marker.geometry.size;
       el.style.height = marker.geometry.size;
+      el.style.backgroundColor = color;
+      el.style.boxShadow = `0px 0px 5px 0px ${color}`;
 
       new mapboxgl.Marker(el)
       .setLngLat(marker.geometry.coordinates)

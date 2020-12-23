@@ -134,9 +134,10 @@ table {
 }
 
 .marker {
-  background-color: #961414;
   border-radius: 100%;
   cursor: pointer;
+  box-shadow: 0px 0px 5px 0px #941414;
+  opacity: 0.8;
 }
 
 .mapboxgl-popup {
@@ -147,6 +148,24 @@ table {
   color: black;
   text-align: center;
   padding: 1em;
+}
+
+.btn {
+  height: 30px;
+  padding: 0 1em;
+  background-color: #121414;
+}
+
+.btn-cases {
+  color: #941414;
+}
+
+.btn-deaths {
+  color: #e7ba26;
+}
+
+.btn-recovered {
+  color: #017767;
 }
 
 * {
@@ -201,7 +220,7 @@ section {
 .info-container span {
   font-size: 1.5em;
   font-weight: bold;
-  color: #961414;
+  color: #941414;
 }
 
 .list-container {
@@ -238,7 +257,7 @@ section {
   flex-wrap: wrap;
 }
 .list-container li .number {
-  color: #961414;
+  color: #941414;
   font-weight: bold;
 }
 .list-container .country-logo {

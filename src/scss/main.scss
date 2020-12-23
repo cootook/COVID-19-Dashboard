@@ -3,9 +3,9 @@
 // colors
 $bg-color: #121414;
 $section-bg-color: #1b1f22;
-$main-red: #961414; //all
+$main-red: #941414; //all
 $main-green: #017767; //recovered
-$main-yellow: rgb(231, 186, 38); //deaths
+$main-yellow: #e7ba26; //deaths
 $main-blue: rgb(18, 123, 192);
 $text-color: #eee;
 $link-color: #a3a3a3;
@@ -36,6 +36,7 @@ $main-transition: all 0.3s ease;
 }
 
 @import 'map.scss';
+
 
 * {
   @include position(static, 0, 0);

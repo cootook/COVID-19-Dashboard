@@ -3,9 +3,10 @@
   height: calc(100% - 30px);
 }
 .marker {
-  background-color: $main-red;
+//   background-color: $main-red;
   border-radius: 100%;
   cursor: pointer;
+  opacity: .8;
 }
 .mapboxgl-popup {
   max-width: 240px;
@@ -15,4 +16,19 @@
   color: black;
   text-align: center;
   padding: 1em;
+}
+
+.btn{
+    height: 30px;
+    padding: 0 1em;
+    background-color: $bg-color;
+}
+.btn-cases{
+color: $main-red;
+}
+.btn-deaths{
+color: $main-yellow;
+}
+.btn-recovered{
+color: $main-green;
 }
