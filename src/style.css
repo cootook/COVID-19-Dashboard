@@ -195,6 +195,11 @@ section {
   overflow: hidden;
   overflow-y: scroll;
 }
+.list-container .list-container--heading {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
 .list-container h2 {
   font-size: 1em;
   margin-bottom: 1em;
@@ -215,6 +220,7 @@ section {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  width: 100%;
 }
 .list-container li .number {
   color: #961414;
@@ -223,7 +229,6 @@ section {
 .list-container .country-logo {
   width: 24px;
   height: 24px;
-  background: center/contain url("assets/icons/US.svg") no-repeat;
 }
 
 .map-container {

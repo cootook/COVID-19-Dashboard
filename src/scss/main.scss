@@ -95,12 +95,20 @@ section {
 
 }
 
+
+
 .list-container {
   grid-area: list;
   @include flex(column, flex-start, flex-start);
   @include position(static, 0, 1em);
   overflow: hidden;
   overflow-y: scroll;
+
+  .list-container--heading {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
 
   h2 {
     font-size: 1em;
@@ -117,9 +125,11 @@ section {
     width: 100%;
   }
 
+
   li {
     @include flex(row, center, space-between);
     flex-wrap: wrap;
+    width: 100%;
 
     .number {
       color: $main-red;
@@ -130,7 +140,7 @@ section {
 
   .country-logo {
     @include size(24px, 24px);
-    background: center/contain url("assets/icons/US.svg") no-repeat;
+    // background: center/contain url("assets/icons/US.svg") no-repeat;
   }
 
 }
