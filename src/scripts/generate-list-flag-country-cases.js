@@ -87,7 +87,7 @@ export default class generateListFlagCountryCases {
 
       const listCountryCase = document.createElement('span')
       listCountryCase.classList.add('number')
-      listCountryCase.innerText = cases
+      listCountryCase.innerText = cases.toLocaleString()
 
 
 
