@@ -1,0 +1,26 @@
+$bg-color: #121414;
+$section-bg-color: #1b1f22;
+$main-red: #941414; //all
+$main-green: #017767; //recovered
+$main-yellow: #e7ba26; //deaths
+$main-blue: rgb(18, 123, 192);
+$text-color: #eee;
+$link-color: #a3a3a3;
+
+.info-container--heading {
+  font-size: 1.5rem;
+  margin: 5px 0 5px 0;
+}
+
+.info-container--stat {
+  font-weight: bold;
+  color: $main-red;
+  font-size: 1.5rem;
+  margin: 5px 0 5px 0;
+}
+
+.info-container--update {
+  color: $main-blue;
+  font-size: 1rem;
+  margin: 5px 0 5px 0;
+}
