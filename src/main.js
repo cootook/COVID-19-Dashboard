@@ -43,17 +43,17 @@ async function mainCovid() {
   });
   // !!!************************************************
 
-//   window.alert(`
-//   Приветствуем тебя, дорогой друг!
-// Если ты читаешь это сообщение, значит, мы еще не завершили работу над приложением. 
-// Если возможно, отложи проверку или оставь контакты при кроссчеке, чтоб можно было 
-// связаться по завершинию таска. 
-// Заранее благодарим! 
-//           Dear friend!
-// We have not finished our work yet. So if it is possible,
-// please do the cross-check a little lately or give your contacts
-// in feedback. 
-// Thanks a lot, we really appreciate that.`)
+  window.alert(`
+  Приветствуем тебя, дорогой друг!
+Если ты читаешь это сообщение, значит, мы еще не завершили работу над приложением. 
+Если возможно, отложи проверку или оставь контакты при кроссчеке, чтоб можно было 
+связаться по завершинию таска. 
+Заранее благодарим! 
+          Dear friend!
+We have not finished our work yet. So if it is possible,
+please do the cross-check a little lately or give your contacts
+in feedback. 
+Thanks a lot, we really appreciate that.`);
 
 let listener = await new Listener(dataApiDiseaseSh);
 await listener.eventHandler();
