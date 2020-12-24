@@ -1,10 +1,4 @@
-import { info } from 'autoprefixer';
 import dataApiDiseaseSh from '../data/from-api-disease-sh.js';
-
-//<section class="info-container" id="info-container">
-//    <h2>Global Cases</h2>
-//    <span>123 456 789</span>
-//</section>
 
 export default class CasesLustUpdate {
 
@@ -21,8 +15,8 @@ export default class CasesLustUpdate {
       const numDay = dateObj.getDate();
       const day = dateObj.getDay();
       const hour = dateObj.getHours();
-      const minute = dateObj.getMinutes();
-      const second = dateObj.getSeconds();
+      let minute = dateObj.getMinutes();
+      let second = dateObj.getSeconds();
 
       if (minute < 10) minute = "0" + minute;
 
@@ -33,43 +27,34 @@ export default class CasesLustUpdate {
 
       return out;
     }
-    const statValue = dataApiDiseaseSh.world.casesLustUpdate
+    const statValue = dataApiDiseaseSh.world.cases
     const updateValue = dataApiDiseaseSh.world.updated
 
-    // const infoContainer = document.querySelector('.info-container')
-    const fragment = document.createComment
-    const heading = document.createElement('h2')
-    heading.classList.add('info-container--heading')
-    const stat = document.createElement('div')
-    stat.classList.add('info-container--stat')
-    const update = document.createElement('div')
-    update.classList.add('info-container--update')
+    this.heading = document.createElement('h2')
+    this.heading.classList.add('info-container--heading')
+    this.stat = document.createElement('div')
+    this.stat.classList.add('info-container--stat')
+    this.update = document.createElement('div')
+    this.update.classList.add('info-container--update')
 
-    fragment.appendChild(heading)
-    fragment.appendChild(stat)
-    fragment.appendChild(update)
-
-    heading.innerText = `Global Cases`
-    stat.innerText = statValue
-    update.innerText = `Last update ${showTime(updateValue)}`
-    this.fragment = fragment
-    return fragment;
+    this.heading.innerText = `Global Cases`
+    this.stat.innerText = statValue
+    this.update.innerText = `Last update ${showTime(updateValue)}`
   }
 
   appendStatUpdate() {
     const infoContainer = document.querySelector('.info-container')
-    infoContainer.appendChild(this.fragment)
+    infoContainer.appendChild(this.heading)
+    infoContainer.appendChild(this.stat)
+    infoContainer.appendChild(this.update)
   }
 
   updateSection() {
-    const infoContainer = document.querySelector('.info-container')
-
     document.querySelector('.info-container--heading').remove()
     document.querySelector('.info-container--stat').remove()
     document.querySelector('.info-container--update').remove()
-
     const newInfo = new CasesLustUpdate()
-    infoContainer.appendChild(newInfo)
+    newInfo.appendStatUpdate()
   }
 
 }
