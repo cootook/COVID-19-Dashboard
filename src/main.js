@@ -3,6 +3,7 @@ import dataApiDiseaseSh from './data/from-api-disease-sh.js';
 import grafCovid from './scripts/graph.js';
 import generateListFlagCountryCases from './scripts/generate-list-flag-country-cases.js'
 import Map from './scripts/map.js';
+import CasesLustUpdate from './scripts/cases-lust-update.js'
 
 // !!!************************************************
 let mode = { // maybe you should use const?
@@ -21,7 +22,9 @@ async function mainCovid() {
 
   const list = new generateListFlagCountryCases();
   list.appendAll()
-  //list.sortListByCases()
+
+  const infoSection = new CasesLustUpdate()
+  infoSection.appendStatUpdate()
 
   // !!!************************************************
   // !!! Please, use imported function. And rename your class, Map is reserved key word of JS

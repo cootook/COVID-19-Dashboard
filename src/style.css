@@ -128,6 +128,24 @@ table {
   border-spacing: 0;
 }
 
+.info-container--heading {
+  font-size: 1.5rem;
+  margin: 5px 0 5px 0;
+}
+
+.info-container--stat {
+  font-weight: bold;
+  color: #941414;
+  font-size: 1.5rem;
+  margin: 5px 0 5px 0;
+}
+
+.info-container--update {
+  color: #127bc0;
+  font-size: 1rem;
+  margin: 5px 0 5px 0;
+}
+
 #map {
   width: 100%;
   height: calc(100% - 30px);
