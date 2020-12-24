@@ -38,7 +38,7 @@ export default class CasesLustUpdate {
     this.update.classList.add('info-container--update')
 
     this.heading.innerText = `Global Cases`
-    this.stat.innerText = statValue
+    this.stat.innerText = statValue.toLocaleString()
     this.update.innerText = `Last update ${showTime(updateValue)}`
   }
 
