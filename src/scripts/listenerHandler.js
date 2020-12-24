@@ -13,6 +13,11 @@ export default class Listener {
     }
 
     graphRender(e) {
+        document.querySelector('.graph-container__content').innerHTML = '';
+        let canvas = document.createElement('canvas');
+        canvas.id = 'myChart';
+        document.querySelector('.graph-container__content').append(canvas);
+
         let country;
         if (e.target.tagName === 'LI') {
             country = e.target.dataset.country;
