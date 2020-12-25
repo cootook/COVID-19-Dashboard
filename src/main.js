@@ -4,7 +4,7 @@ import grafCovid from './scripts/graph.js';
 import GenerateListFlagCountryCases from './scripts/generate-list-flag-country-cases.js';
 import Map from './scripts/map.js';
 import CasesLustUpdate from './scripts/cases-lust-update.js'
-import getTable from './scripts/table.js'
+import GetTable from './scripts/table.js'
 import Listener from './scripts/listenerHandler.js';
 
 // !!!************************************************
@@ -29,7 +29,7 @@ async function mainCovid() {
   const infoSection = new CasesLustUpdate()
   infoSection.appendStatUpdate()
 
-  getTable()
+  const tableSection = new GetTable()
 
   // !!!************************************************
   // !!! Please, use imported function. And rename your class, Map is reserved key word of JS
