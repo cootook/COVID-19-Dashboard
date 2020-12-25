@@ -9,11 +9,13 @@ export default class Listener {
 
 
     eventHandler() {
-            this.itemsList.addEventListener('click', this.graphRender.bind(this.data));
+        this.itemsList.addEventListener('click', this.graphRender.bind(this.data));
     }
 
     graphRender(e) {
-        document.querySelector('.graph-container__content').innerHTML = '';
+        const grafContainer = document.querySelector('.graph-container__content')
+        if (grafContainer) grafContainer.innerHTML = '';
+        else return false;
         let canvas = document.createElement('canvas');
         canvas.id = 'myChart';
         document.querySelector('.graph-container__content').append(canvas);
@@ -25,7 +27,7 @@ export default class Listener {
         else {
             country = e.target.parentNode.dataset.country;
         }
-
+        console.log('class Listener - ', country)
         grafCovid(this, country);
     }
 

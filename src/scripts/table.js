@@ -64,9 +64,6 @@ export default function getTable() {
     const casesStat = dataApiDiseaseSh.world.cases.toLocaleString()
     const deathsStat = dataApiDiseaseSh.world.deaths.toLocaleString()
     const recoveredStat = dataApiDiseaseSh.world.recovered.toLocaleString()
-
-
-
     return [casesStat, deathsStat, recoveredStat]
   }
   const cases = document.createElement('div')
@@ -79,20 +76,11 @@ export default function getTable() {
   deaths.innerText = `Deaths ${getStat()[1]}`
   recovered.innerText = `Recovered ${getStat()[2]}`
 
-
-
   // put the results in the section
   const tableSection = document.querySelector('.table-container')
-
-
   tableSection.appendChild(heading)
   tableSection.appendChild(switchersAll)
   tableSection.appendChild(cases)
   tableSection.appendChild(deaths)
   tableSection.appendChild(recovered)
-
-
-
-
-
 }

@@ -1,11 +1,11 @@
 import dataApiDiseaseSh from '../data/from-api-disease-sh.js';
 
-export default class generateListFlagCountryCases {
+export default class GenerateListFlagCountryCases {
 
   constructor() {
-    const { countries } = dataApiDiseaseSh;
-    generateListFlagCountryCases.prototype.sortedByCases = '1-2'
-    generateListFlagCountryCases.prototype.sortedByCountries = 'a-b'
+    const { countries, countriesHistory } = dataApiDiseaseSh;
+    GenerateListFlagCountryCases.prototype.sortedByCases = '1-2'
+    GenerateListFlagCountryCases.prototype.sortedByCountries = 'a-b'
 
 
 
@@ -38,9 +38,18 @@ export default class generateListFlagCountryCases {
 
     this.listUl = document.createElement('ul') // use as a container for the list
 
+    for (let i = countries.length - 1; i >= 0; i--) {
+
+      const nameInCountries = countries[i].country;
+      const isIn = countriesHistory.some(c => c.country === nameInCountries)
+      if (!isIn) {
+        countries.splice(i, 1)
+      }
+
+    }
+
     this.arrListOfCountries = countries.map((item) => {
       {
-
         //   "country":"Afghanistan",
         //   "countryInfo":
         //     {
@@ -109,7 +118,7 @@ export default class generateListFlagCountryCases {
 
   sortListByCases() {
     const btnSort = document.querySelector('.list-container--btn__sort-by-cases')
-    const listContainer = document.querySelector('.list-container')
+    const listContainer = document.querySelector('.list-container > ul')
     const arrList = document.querySelectorAll('.list-container--ul__item')
     btnSort.classList.toggle('list-container--btn__sort-by-cases--up')
     arrList.forEach(x => {
@@ -117,11 +126,11 @@ export default class generateListFlagCountryCases {
     })
     const temp = Array.prototype.slice.call(arrList, 0)
 
-    if (generateListFlagCountryCases.prototype.sortedByCases === '2-1') {
-      generateListFlagCountryCases.prototype.sortedByCases = '1-2'
+    if (GenerateListFlagCountryCases.prototype.sortedByCases === '2-1') {
+      GenerateListFlagCountryCases.prototype.sortedByCases = '1-2'
       temp.sort((x, y) => Number(x.dataset.cases) - Number(y.dataset.cases))
     } else {
-      generateListFlagCountryCases.prototype.sortedByCases = '2-1'
+      GenerateListFlagCountryCases.prototype.sortedByCases = '2-1'
       temp.sort((x, y) => Number(y.dataset.cases) - Number(x.dataset.cases))
     }
     temp.forEach(x => {
@@ -130,15 +139,15 @@ export default class generateListFlagCountryCases {
   }
 
   sortListByCountries() {
-    const listContainer = document.querySelector('.list-container')
+    const listContainer = document.querySelector('.list-container > ul')
     const arrList = document.querySelectorAll('.list-container--ul__item')
     arrList.forEach(x => {
       x.remove()
     })
     const temp = Array.prototype.slice.call(arrList, 0)
 
-    if (generateListFlagCountryCases.prototype.sortedByCountries === 'a-b') {
-      generateListFlagCountryCases.prototype.sortedByCountries = 'b-a'
+    if (GenerateListFlagCountryCases.prototype.sortedByCountries === 'a-b') {
+      GenerateListFlagCountryCases.prototype.sortedByCountries = 'b-a'
       temp.sort((x, y) => {
 
         const xCountry = x.dataset.country.toLowerCase()
@@ -147,7 +156,7 @@ export default class generateListFlagCountryCases {
         else return 1
       })
     } else {
-      generateListFlagCountryCases.prototype.sortedByCountries = 'a-b'
+      GenerateListFlagCountryCases.prototype.sortedByCountries = 'a-b'
       temp.sort((x, y) => {
         const xCountry = x.dataset.country.toLowerCase()
         const yCountry = y.dataset.country.toLowerCase()
@@ -159,6 +168,4 @@ export default class generateListFlagCountryCases {
       listContainer.appendChild(x)
     })
   }
-
-
 }
