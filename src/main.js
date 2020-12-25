@@ -19,7 +19,7 @@ async function mainCovid() {
   // here put functions
   await getDataFromApiStat() // this must be before you take data from  {dataApiDiseaseSh}!
 
-  // console.log('mainCovid --->  dataApiDiseaseSh', dataApiDiseaseSh);
+  console.log('mainCovid --->  dataApiDiseaseSh', dataApiDiseaseSh);
 
   grafCovid(dataApiDiseaseSh, 'world');
 
@@ -58,7 +58,7 @@ async function mainCovid() {
   in feedback. 
   Thanks a lot, we really appreciate that.`);
 
-  let listener = new Listener(dataApiDiseaseSh);
+  const listener = new Listener(dataApiDiseaseSh);
   listener.eventHandler();
 
 
