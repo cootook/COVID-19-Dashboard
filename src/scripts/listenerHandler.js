@@ -27,7 +27,6 @@ export default class Listener {
         else {
             country = e.target.parentNode.dataset.country;
         }
-        console.log('class Listener - ', country)
         grafCovid(this, country);
     }
 

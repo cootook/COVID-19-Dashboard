@@ -60,7 +60,7 @@ export default function grafCovid(dataObj, word) {
     for (let i = 1; i < values.length; i += 1) {
       newValues[i] = values[i] - values[i - 1];
       if (newValues[i] < 0) {
-        console.log(values);
+        // console.log(values);
       }
     }
 
