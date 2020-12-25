@@ -88,5 +88,13 @@ export default class GetTable {
 
   tableRefresh() {
     const table = document.querySelector('.table--heading')
+    document.querySelector('.table--heading').innerText = 'refreshed'
+    document.querySelector('.stat--text-cases').innerText = 'refreshed'
+    document.querySelector('.stat--text-deaths').innerText = 'refreshed'
+    document.querySelector('.stat--text-recovered').innerText = 'refreshed'
+    // this.heading.innerText = 'refreshed'
+    // this.cases.innerText = 'refreshed'
+    // this.deaths.innerText = 'refreshed'
+    // this.recovered.innerText = 'refreshed'
   }
 } 

@@ -7,10 +7,10 @@ export default function grafCovid(dataObj, word) {
   }
   else {
     let newData;
-    dataObj.countriesHistory.some((e, i) => {
+    dataObj.countriesHistory.forEach((e, i) => {
       if (e.country === word) {
         newData = dataObj.countriesHistory[i].timeline;
-        return true;
+        //  return true;
       }
     })
     dataObj = newData;

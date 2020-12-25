@@ -1,5 +1,7 @@
 
 import grafCovid from './graph.js';
+import GetTable from './table.js'
+
 
 export default class Listener {
     constructor(data) {
@@ -10,6 +12,7 @@ export default class Listener {
 
     eventHandler() {
         this.itemsList.addEventListener('click', this.graphRender.bind(this.data));
+        this.itemsList.addEventListener('click', this.refreshTable);
     }
 
     graphRender(e) {
@@ -30,5 +33,8 @@ export default class Listener {
         grafCovid(this, country);
     }
 
-
+    refreshTable(e) {
+        GetTable.prototype.tableRefresh()
+        console.log('ref ')
+    }
 }
