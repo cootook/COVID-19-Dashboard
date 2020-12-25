@@ -3,14 +3,12 @@ import Graph from './chart.js';
 export default function grafCovid(dataObj, word) {
   if (word === 'world') {
     dataObj = dataObj.worldHistory;
-    // console.log(dataObj);
   }
   else {
     let newData;
     dataObj.countriesHistory.forEach((e, i) => {
       if (e.country === word) {
         newData = dataObj.countriesHistory[i].timeline;
-        //  return true;
       }
     })
     dataObj = newData;

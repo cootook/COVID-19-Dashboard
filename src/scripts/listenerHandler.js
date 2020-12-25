@@ -2,18 +2,24 @@
 import grafCovid from './graph.js';
 import GetTable from './table.js';
 import currentData from '../data/current-data-show.js';
-
+import dataApiDiseaseSh from '../data/from-api-disease-sh.js';
 
 export default class Listener {
     constructor(data) {
         this.itemsList = document.querySelector('.list-container > ul');
         this.data = data;
+        this.infoContainer = document.querySelector('.info-container')
+        this.switcherAllToday = document.querySelector('.switcher--check-box__all-today')
+        this.switcherAbsolutePer = document.querySelector('.switcher--check-box__abs-per')
     }
 
 
     eventHandler() {
         this.itemsList.addEventListener('click', this.graphRender.bind(this.data));
         this.itemsList.addEventListener('click', this.refreshTable);
+        this.infoContainer.addEventListener('click', this.getGlobal);
+        this.switcherAllToday.addEventListener('click', GetTable.prototype.switchAllToday);
+        this.switcherAbsolutePer.addEventListener('click', GetTable.prototype.switchAbsPer);
     }
 
     graphRender(e) {
@@ -25,13 +31,17 @@ export default class Listener {
         document.querySelector('.graph-container__content').append(canvas);
 
         let country;
-        if (e.target.tagName === 'LI') {
-            country = e.target.dataset.country;
+        if (e) {
+            if (e.target.tagName === 'LI') {
+                country = e.target.dataset.country;
+            }
+            else {
+                country = e.target.parentNode.dataset.country;
+            }
+        } else {
+            country = 'world'
         }
-        else {
-            country = e.target.parentNode.dataset.country;
-        }
-        grafCovid(this, country);
+        grafCovid(dataApiDiseaseSh, country);
     }
 
     refreshTable(e) {
@@ -42,7 +52,15 @@ export default class Listener {
             currentData.country = e.target.parentNode.dataset.country;
         }
 
-        console.log(currentData.country)
         GetTable.prototype.tableRefresh()
     }
+
+    getGlobal() {
+        currentData.isAbs = true;
+        currentData.isAll = true;
+        currentData.country = 'world'
+        GetTable.prototype.tableRefresh()
+        Listener.prototype.graphRender()
+    }
+
 }

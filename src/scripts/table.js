@@ -15,8 +15,8 @@ export default class GetTable {
     this.switcherTextAll = document.createElement('div');
     this.switcherTextToday = document.createElement('div');
 
-    this.switcherAllToday.classList.add('switcher', 'switcher--mode_train');
-    this.checkBoxAllToday.classList.add('switcher--check-box');
+    this.switcherAllToday.classList.add('switcher', 'switcher--all-today');
+    this.checkBoxAllToday.classList.add('switcher--check-box', 'switcher--check-box__all-today');
     this.switcherSliderAllToday.classList.add('switcher--slider', 'switcher--slider__all-today');
     this.switcherTextAll.classList.add('switcher--text', 'switcher--text__all')
     this.switcherTextToday.classList.add('switcher--text', 'switcher--text__today')
@@ -37,8 +37,8 @@ export default class GetTable {
     this.switcherTextAbs = document.createElement('div');
     this.switcherTextPerHundred = document.createElement('div');
 
-    this.switcherAbsPerHundred.classList.add('switcher', 'switcher--mode_train');
-    this.checkBoxAbsPerHundred.classList.add('switcher--check-box');
+    this.switcherAbsPerHundred.classList.add('switcher', 'switcher--abs-per');
+    this.checkBoxAbsPerHundred.classList.add('switcher--check-box', 'switcher--check-box__abs-per');
     this.switcherSliderAbsPerHundred.classList.add('switcher--slider', 'switcher--slider__abs-per');
     this.switcherTextAbs.classList.add('switcher--text', 'switcher--text__abs')
     this.switcherTextPerHundred.classList.add('switcher--text', 'switcher--text__per')
@@ -93,16 +93,35 @@ export default class GetTable {
   }
 
   getStat() {
-    const pathCases = currentData.isAbs ? 'cases' : 'casesPerOneMillion'
-    const pathDeaths = currentData.isAbs ? 'deaths' : 'deathsPerOneMillion'
-    const pathRecovered = currentData.isAbs ? 'recovered' : 'activePerOneMillion'
     let casesStat = null;
     let deathsStat = null;
     let recoveredStat = null;
-    if (currentData.country === 'world') {
+
+    let pathCases = null;
+    let pathDeaths = null;
+    let pathRecovered = null;
+
+    if (currentData.isAll) {
+      pathCases = currentData.isAbs ? 'cases' : 'casesPerOneMillion'
+      pathDeaths = currentData.isAbs ? 'deaths' : 'deathsPerOneMillion'
+      pathRecovered = currentData.isAbs ? 'recovered' : 'recoveredPerOneMillion'
+    } else {
+      pathCases = 'todayCases'
+      pathDeaths = 'todayDeaths'
+      pathRecovered = 'todayRecovered'
+    }
+
+
+    if (currentData.country === 'world' && currentData.isAll) {
       casesStat = dataApiDiseaseSh.world[pathCases].toLocaleString()
       deathsStat = dataApiDiseaseSh.world[pathDeaths].toLocaleString()
       recoveredStat = dataApiDiseaseSh.world[pathRecovered].toLocaleString()
+      return [casesStat, deathsStat, recoveredStat]
+    } else if (currentData.country === 'world') {
+      const pop = dataApiDiseaseSh.world.population
+      casesStat = (dataApiDiseaseSh.world[pathCases]).toLocaleString()
+      deathsStat = (dataApiDiseaseSh.world[pathDeaths]).toLocaleString()
+      recoveredStat = (dataApiDiseaseSh.world[pathRecovered]).toLocaleString()
       return [casesStat, deathsStat, recoveredStat]
     }
     const currentCountry = dataApiDiseaseSh.countries.find(x => x.country === currentData.country)
@@ -110,5 +129,15 @@ export default class GetTable {
     deathsStat = currentCountry[pathDeaths].toLocaleString()
     recoveredStat = currentCountry[pathRecovered].toLocaleString()
     return [casesStat, deathsStat, recoveredStat]
+  }
+
+  switchAllToday(e) {
+    currentData.isAll = currentData.isAll ? false : true;
+    GetTable.prototype.tableRefresh()
+  }
+
+  switchAbsPer(e) {
+    currentData.isAbs = currentData.isAbs ? false : true;
+    GetTable.prototype.tableRefresh()
   }
 } 
