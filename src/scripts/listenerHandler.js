@@ -1,6 +1,7 @@
 
 import grafCovid from './graph.js';
-import GetTable from './table.js'
+import GetTable from './table.js';
+import currentData from '../data/current-data-show.js';
 
 
 export default class Listener {
@@ -34,7 +35,14 @@ export default class Listener {
     }
 
     refreshTable(e) {
+        if (e.target.tagName === 'LI') {
+            currentData.country = e.target.dataset.country;
+        }
+        else {
+            currentData.country = e.target.parentNode.dataset.country;
+        }
+
+        console.log(currentData.country)
         GetTable.prototype.tableRefresh()
-        console.log('ref ')
     }
 }
