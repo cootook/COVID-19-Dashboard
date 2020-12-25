@@ -3,7 +3,8 @@ import dataApiDiseaseSh from './data/from-api-disease-sh.js';
 import grafCovid from './scripts/graph.js';
 import generateListFlagCountryCases from './scripts/generate-list-flag-country-cases.js';
 import Map from './scripts/map.js';
-import CasesLustUpdate from './scripts/cases-lust-update.js';
+import CasesLustUpdate from './scripts/cases-lust-update.js'
+import getTable from './scripts/table.js'
 import Listener from './scripts/listenerHandler.js';
 
 // !!!************************************************
@@ -27,6 +28,8 @@ async function mainCovid() {
 
   const infoSection = new CasesLustUpdate()
   infoSection.appendStatUpdate()
+
+  getTable()
 
   // !!!************************************************
   // !!! Please, use imported function. And rename your class, Map is reserved key word of JS

@@ -1,5 +1,6 @@
 @import './clear-styles.component.scss';
 @import './info-section.scss';
+@import './table.scss';
 
 //colors
 $bg-color: #121414;
@@ -57,7 +58,7 @@ body {
   color: $text-color;
   display: grid;
   padding: 1em;
-  grid-template-rows: max-content repeat(3, 1fr) auto;
+  grid-template-rows: 10% 20% 20% 40% auto;
   grid-template-columns: 1fr 3fr 2fr;
   grid-gap: 1em;
   grid-template-areas:
@@ -254,14 +255,14 @@ section {
 @media (max-width: 1024px) {
 
   body {
-    grid-template-rows: max-content 1fr 500px 500px;
+    grid-template-rows: 10% 15% 30% 30% 10%;
     grid-template-columns: 1fr 2fr;
     grid-template-areas:
       "header header"
       "info map"
       "list map"
-      "graph table"
-      "graph table"
+      "table graph"
+      // "table graph"
       "footer footer";
   }
 

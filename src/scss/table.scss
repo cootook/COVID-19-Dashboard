@@ -1,0 +1,86 @@
+$switcherColorDefault: black;
+$switcherColorChecked: #2196F3;
+$sliderColorDefault: white;
+$switcherTransitionDuration: .4s;
+
+%switcherShadow {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.switchers-all--container {
+  width: 100%;
+  height: 80px;
+}
+
+.table--heading {
+  font-size: 1.5rem;
+  margin: 15px 0 30px 0;
+}
+
+.switcher--check-box {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switcher {
+  transition: .5s;
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 40px;
+  cursor: pointer;
+  border: 2px solid black;
+}
+
+.switcher--text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: sandybrown;
+  width: 50%;
+  height: 40px;
+}
+
+.switcher--slider {
+  opacity: 0.65;
+  width: 50%;
+  height: 40px;
+  position: absolute;
+  left: 50%;
+  background-color: $switcherColorDefault;
+  transition: $switcherTransitionDuration;
+  border-radius: 1px;
+
+}
+
+input:checked+.switcher--slider {
+  left: 0;
+}
+
+
+input:focus+.switcher--slider {
+  @extend %switcherShadow;
+}
+
+.stat--text {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: 80%;
+  height: 60px;
+  //margin-left: 45px;
+}
+
+.stat--text-cases {
+  color: $main-red;
+}
+
+.stat--text-deaths {
+  color: $main-yellow;
+}
+
+.stat--text-recovered {
+  color: $main-green;
+}
