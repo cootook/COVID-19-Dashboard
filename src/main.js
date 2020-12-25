@@ -1,10 +1,11 @@
 import getDataFromApiStat from './scripts/get-data-from-api-stat.js'
 import dataApiDiseaseSh from './data/from-api-disease-sh.js';
 import grafCovid from './scripts/graph.js';
-import generateListFlagCountryCases from './scripts/generate-list-flag-country-cases.js'
+import generateListFlagCountryCases from './scripts/generate-list-flag-country-cases.js';
 import Map from './scripts/map.js';
 import CasesLustUpdate from './scripts/cases-lust-update.js'
 import getTable from './scripts/table.js'
+import Listener from './scripts/listenerHandler.js';
 
 // !!!************************************************
 let mode = { // maybe you should use const?
@@ -17,6 +18,7 @@ let mode = { // maybe you should use const?
 async function mainCovid() {
   // here put functions
   await getDataFromApiStat() // this must be before you take data from  {dataApiDiseaseSh}!
+
   console.log('mainCovid --->  dataApiDiseaseSh', dataApiDiseaseSh);
 
   grafCovid(dataApiDiseaseSh, 'world');
@@ -54,7 +56,10 @@ async function mainCovid() {
 We have not finished our work yet. So if it is possible,
 please do the cross-check a little lately or give your contacts
 in feedback. 
-Thanks a lot, we really appreciate that.`)
+Thanks a lot, we really appreciate that.`);
+
+let listener = await new Listener(dataApiDiseaseSh);
+await listener.eventHandler();
 
 
 }
