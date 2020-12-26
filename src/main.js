@@ -61,8 +61,7 @@ async function mainCovid() {
 
   const listener = new Listener(dataApiDiseaseSh);
   listener.eventHandler();
-  let input = new Search();
-  input();
+  Search();
 
 }
 
