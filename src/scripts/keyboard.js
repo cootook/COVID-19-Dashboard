@@ -1,3 +1,5 @@
+import Search from './search.js';
+
 const Keyboard = {
   elements: {
     main: null,
@@ -123,6 +125,7 @@ const Keyboard = {
       input.addEventListener('keyup', () => {
         this.properties.value = input.value || '';
         this.properties.cursorPosition = input.selectionStart;
+
       });
 
       Keyboard.markBtn();
@@ -258,6 +261,7 @@ const Keyboard = {
             this._triggerEvent('oninput');
             moveCursor('fast_rewind');
             setFocus();
+            Search.prototype.hideNotNeeded();
           });
 
           break;
@@ -293,6 +297,7 @@ const Keyboard = {
             this._triggerEvent('oninput');
             setFocus();
             moveCursor('fast_forward');
+            Search.prototype.hideNotNeeded();
           });
 
           break;
@@ -320,6 +325,7 @@ const Keyboard = {
             setFocus();
             moveCursor('fast_forward');
             if (this.properties.shift) this._triggerShift();
+            Search.prototype.hideNotNeeded();
           });
 
           break;
