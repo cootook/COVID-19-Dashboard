@@ -290,7 +290,7 @@ section {
 
   .list-container {
     li {
-      @include flex(row, center, space-evenly);
+      @include flex(row, center, space-between);
     }
   }
 
