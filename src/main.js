@@ -3,9 +3,10 @@ import dataApiDiseaseSh from './data/from-api-disease-sh.js';
 import grafCovid from './scripts/graph.js';
 import GenerateListFlagCountryCases from './scripts/generate-list-flag-country-cases.js';
 import Map from './scripts/map.js';
-import CasesLustUpdate from './scripts/cases-lust-update.js'
-import GetTable from './scripts/table.js'
+import CasesLustUpdate from './scripts/cases-lust-update.js';
+import GetTable from './scripts/table.js';
 import Listener from './scripts/listenerHandler.js';
+import Search from './scripts/search.js';
 
 // !!!************************************************
 let mode = { // maybe you should use const?
@@ -46,21 +47,22 @@ async function mainCovid() {
   });
   // !!!************************************************
 
-  window.alert(`
-    Приветствуем тебя, дорогой друг!
-  Если ты читаешь это сообщение, значит, мы еще не завершили работу над приложением. 
-  Если возможно, отложи проверку или оставь контакты при кроссчеке, чтоб можно было 
-  связаться по завершинию таска. 
-  Заранее благодарим! 
-            Dear friend!
-  We have not finished our work yet. So if it is possible,
-  please do the cross-check a little lately or give your contacts
-  in feedback. 
-  Thanks a lot, we really appreciate that.`);
+  // window.alert(`
+  //   Приветствуем тебя, дорогой друг!
+  // Если ты читаешь это сообщение, значит, мы еще не завершили работу над приложением. 
+  // Если возможно, отложи проверку или оставь контакты при кроссчеке, чтоб можно было 
+  // связаться по завершинию таска. 
+  // Заранее благодарим! 
+  //           Dear friend!
+  // We have not finished our work yet. So if it is possible,
+  // please do the cross-check a little lately or give your contacts
+  // in feedback. 
+  // Thanks a lot, we really appreciate that.`);
 
   const listener = new Listener(dataApiDiseaseSh);
   listener.eventHandler();
-
+  let input = new Search();
+  input();
 
 }
 
