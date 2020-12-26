@@ -35,6 +35,7 @@ export default class GenerateListFlagCountryCases {
     this.listInputSearch.setAttribute('type', 'search')
     this.listInputSearch.setAttribute('name', 'search')
     this.listInputSearch.setAttribute('placeholder', 'Search by Country')
+    this.listInputSearch.setAttribute('autocomplete', 'off')
 
     this.listUl = document.createElement('ul') // use as a container for the list
 
