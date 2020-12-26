@@ -31,7 +31,8 @@ async function mainCovid() {
   const infoSection = new CasesLustUpdate()
   infoSection.appendStatUpdate()
 
-  const tableSection = new GetTable()
+  new GetTable()
+  getVirtualKeyboard();
 
   // !!!************************************************
   // !!! Please, use imported function. And rename your class, Map is reserved key word of JS
@@ -62,8 +63,8 @@ async function mainCovid() {
 
   const listener = new Listener(dataApiDiseaseSh);
   listener.eventHandler();
-  Search();
-  getVirtualKeyboard();
+  new Search();
+
 
 
 }
