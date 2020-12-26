@@ -30,12 +30,23 @@ export default class GenerateListFlagCountryCases {
     listHeadingCases.appendChild(btnSortedByCases)
     this.listHeading.classList.add('list-container--heading')
 
+    this.searchContainer = document.createElement('div')
+    this.searchContainer.classList.add('list-container--search__container')
+
     this.listInputSearch = document.createElement('input')
-    this.listInputSearch.classList.add('list-container--search')
+    this.listInputSearch.classList.add('list-container--search', 'use-keyboard-input')
     this.listInputSearch.setAttribute('type', 'text')
     this.listInputSearch.setAttribute('name', 'search')
     this.listInputSearch.setAttribute('placeholder', 'Search by Country')
     this.listInputSearch.setAttribute('autocomplete', 'off')
+
+    this.btnGetKeyboard = document.createElement('div')
+    this.btnGetKeyboard.classList.add('list-container--search__btn-keyboard')
+    this.btnGetKeyboard.innerHTML = '<i class="material-icons">keyboard</i>'
+    // this.listInputSearch.appendChild(this.btnGetKeyboard)
+
+    this.searchContainer.append(this.listInputSearch)
+    this.searchContainer.append(this.btnGetKeyboard)
 
     this.listUl = document.createElement('ul') // use as a container for the list
 
@@ -113,7 +124,7 @@ export default class GenerateListFlagCountryCases {
   appendAll() {
     const listContainer = document.querySelector('.list-container')
     listContainer.appendChild(this.listHeading)
-    listContainer.appendChild(this.listInputSearch)
+    listContainer.appendChild(this.searchContainer)
     listContainer.appendChild(this.listUl)
   }
 
