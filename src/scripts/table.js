@@ -3,10 +3,14 @@ import currentData from '../data/current-data-show.js';
 
 export default class GetTable {
   constructor() {
+    // str to speak
+    GetTable.prototype.strToSpeak = 'no data';
     // table heading
     this.heading = document.createElement('h2')
     this.heading.classList.add('table--heading')
     this.heading.innerText = `${this.getHeadingText()}`
+    this.heading.innerHTML += '<span class="material-icons listen-to">hearing</span>'
+    this.heading.style.cursor = 'url(./assets/icons/volume.png) 4 12, auto'
 
     // switcher cases for today or cumulative
     this.switcherAllToday = document.createElement('label');
@@ -80,7 +84,8 @@ export default class GetTable {
 
   tableRefresh() {
     const table = document.querySelector('.table--heading')
-    document.querySelector('.table--heading').innerText = this.getHeadingText()
+    table.innerText = this.getHeadingText()
+    table.innerHTML += '<span class="material-icons listen-to">hearing</span>'
     const currentStat = this.getStat()
     document.querySelector('.stat--text-cases').innerText = `Cases ${currentStat[0]}`
     document.querySelector('.stat--text-deaths').innerText = `Deaths ${currentStat[1]}`
@@ -88,8 +93,14 @@ export default class GetTable {
   }
 
   getHeadingText() {
-    if (currentData.country === 'world') return 'Global stat'
-    return currentData.country
+    if (currentData.country === 'world') {
+      const headingWorld = 'Global statistic ';
+      GetTable.prototype.strToSpeak = headingWorld;
+      return headingWorld;
+    }
+    const headingCountry = currentData.country;
+    GetTable.prototype.strToSpeak = headingCountry;
+    return `Statistic for ${headingCountry} `
   }
 
   getStat() {
@@ -113,22 +124,25 @@ export default class GetTable {
 
 
     if (currentData.country === 'world' && currentData.isAll) {
-      casesStat = dataApiDiseaseSh.world[pathCases].toLocaleString()
-      deathsStat = dataApiDiseaseSh.world[pathDeaths].toLocaleString()
-      recoveredStat = dataApiDiseaseSh.world[pathRecovered].toLocaleString()
-      return [casesStat, deathsStat, recoveredStat]
+      casesStat = dataApiDiseaseSh.world[pathCases]
+      deathsStat = dataApiDiseaseSh.world[pathDeaths]
+      recoveredStat = dataApiDiseaseSh.world[pathRecovered]
+      GetTable.prototype.strToSpeak += ` there is ${casesStat.toEnglish()} total cases, ${deathsStat.toEnglish()} deaths and ${recoveredStat.toEnglish()} recovered.`
+      return [casesStat, deathsStat, recoveredStat].map(x => x.toLocaleString())
     } else if (currentData.country === 'world') {
       const pop = dataApiDiseaseSh.world.population
-      casesStat = (dataApiDiseaseSh.world[pathCases]).toLocaleString()
-      deathsStat = (dataApiDiseaseSh.world[pathDeaths]).toLocaleString()
-      recoveredStat = (dataApiDiseaseSh.world[pathRecovered]).toLocaleString()
-      return [casesStat, deathsStat, recoveredStat]
+      casesStat = (dataApiDiseaseSh.world[pathCases])
+      deathsStat = (dataApiDiseaseSh.world[pathDeaths])
+      recoveredStat = (dataApiDiseaseSh.world[pathRecovered])
+      GetTable.prototype.strToSpeak += ` today there is ${casesStat.toEnglish()} cases, ${deathsStat.toEnglish()} deaths and ${recoveredStat.toEnglish()} recovered.`
+      return [casesStat, deathsStat, recoveredStat].map(x => x.toLocaleString())
     }
     const currentCountry = dataApiDiseaseSh.countries.find(x => x.country === currentData.country)
-    casesStat = currentCountry[pathCases].toLocaleString()
-    deathsStat = currentCountry[pathDeaths].toLocaleString()
-    recoveredStat = currentCountry[pathRecovered].toLocaleString()
-    return [casesStat, deathsStat, recoveredStat]
+    casesStat = currentCountry[pathCases]
+    deathsStat = currentCountry[pathDeaths]
+    recoveredStat = currentCountry[pathRecovered]
+    GetTable.prototype.strToSpeak += ` there is ${casesStat.toEnglish()} cases, ${deathsStat.toEnglish()} deaths and ${recoveredStat.toEnglish()} recovered.`
+    return [casesStat, deathsStat, recoveredStat].map(x => x.toLocaleString())
   }
 
   switchAllToday(e) {
