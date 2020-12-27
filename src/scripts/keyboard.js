@@ -521,7 +521,6 @@ const Keyboard = {
 
   keyboardSpeechSynthesis() {
     this.properties.isSpeechSynthesisOn = !this.properties.isSpeechSynthesisOn;
-    console.log(this.properties.isSpeechSynthesisOn);
     const synthesisBtn = document.querySelector('.keyboard__key--synthesis');
     synthesisBtn.innerHTML = this.properties.isSpeechSynthesisOn
       ? '<i class="material-icons">stop</i>' : '<i class="material-icons">play_arrow</i>';
@@ -530,7 +529,6 @@ const Keyboard = {
     textInput.disabled = this.properties.isSpeechSynthesisOn;
 
     if (textInput.value == '') {
-      console.log(this.properties.lang);
       textInput.value;
       if (this.properties.lang === 'ru') textInput.value = 'Привет. Вы ничего не ввели, поэтому придётся синтезировать что есть.';
       else textInput.value = 'Hi. There is no text for speech synthesis.';

@@ -3,6 +3,7 @@ import grafCovid from './graph.js';
 import GetTable from './table.js';
 import currentData from '../data/current-data-show.js';
 import dataApiDiseaseSh from '../data/from-api-disease-sh.js';
+import sayString from './speech-synthesis.js';
 
 export default class Listener {
     constructor(data) {
@@ -11,6 +12,7 @@ export default class Listener {
         this.infoContainer = document.querySelector('.info-container')
         this.switcherAllToday = document.querySelector('.switcher--check-box__all-today')
         this.switcherAbsolutePer = document.querySelector('.switcher--check-box__abs-per')
+        this.table = document.querySelector('.table--heading')
     }
 
 
@@ -20,6 +22,13 @@ export default class Listener {
         this.infoContainer.addEventListener('click', this.getGlobal);
         this.switcherAllToday.addEventListener('click', GetTable.prototype.switchAllToday);
         this.switcherAbsolutePer.addEventListener('click', GetTable.prototype.switchAbsPer);
+        this.table.addEventListener('click', () => {
+            if (window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+                return;
+            }
+            sayString(GetTable.prototype.strToSpeak);
+        });
     }
 
     graphRender(e) {
