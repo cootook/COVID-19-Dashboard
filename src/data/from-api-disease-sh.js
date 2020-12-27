@@ -96,6 +96,6 @@ const dataApiDiseaseSh = {
   //     "date": 0
   //   }
   // }
-}
+};
 
 export default dataApiDiseaseSh;

@@ -114,18 +114,17 @@ const Keyboard = {
 
     if (this.properties.firstInit) {
       this.properties.firstInit = !this.properties.firstInit;
-      const input = document.querySelector('.use-keyboard-input')
-      const btnOped = document.querySelector('.list-container--search__btn-keyboard')
+      const input = document.querySelector('.use-keyboard-input');
+      const btnOped = document.querySelector('.list-container--search__btn-keyboard');
 
       btnOped.addEventListener('click', () => {
         Keyboard.open(input.value, (currentValue) => {
           input.value = currentValue;
         });
-      })
+      });
       input.addEventListener('keyup', () => {
         this.properties.value = input.value || '';
         this.properties.cursorPosition = input.selectionStart;
-
       });
 
       Keyboard.markBtn();
@@ -217,7 +216,6 @@ const Keyboard = {
           keyElement.classList.add('keyboard__key--synthesis', 'keyboard__key--speech');
           keyElement.addEventListener('click', () => {
             this.keyboardSpeechSynthesis();
-
           });
 
           break;

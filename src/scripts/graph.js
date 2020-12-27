@@ -3,22 +3,21 @@ import Graph from './chart.js';
 export default function grafCovid(dataObj, word) {
   if (word === 'world') {
     dataObj = dataObj.worldHistory;
-  }
-  else {
+  } else {
     let newData;
     dataObj.countriesHistory.forEach((e, i) => {
       if (e.country === word) {
         newData = dataObj.countriesHistory[i].timeline;
       }
-    })
+    });
     dataObj = newData;
   }
 
-  let graph = new Graph();
+  const graph = new Graph();
   graph.initSize();
-  let buttons = document.querySelectorAll('.graph-container__buttons > button');
-  let arrName = ['Cumulative Cases', 'Cumulative Deaths', 'Cumulative Recovered', 'Daily Cases', 'Daily Deaths', 'Daily Recovered'];
-  let arrData = ['cases', 'deaths', 'recovered', 'cases', 'deaths', 'recovered'];
+  const buttons = document.querySelectorAll('.graph-container__buttons > button');
+  const arrName = ['Cumulative Cases', 'Cumulative Deaths', 'Cumulative Recovered', 'Daily Cases', 'Daily Deaths', 'Daily Recovered'];
+  const arrData = ['cases', 'deaths', 'recovered', 'cases', 'deaths', 'recovered'];
   let index = 0;
   let type = 'line';
 
@@ -31,14 +30,12 @@ export default function grafCovid(dataObj, word) {
     graph.createGraph(x, values, type, arrName[index]);
   }
 
-
-
   function cumulativeHandler() {
     type = 'line';
     data = dataObj[arrData[index]];
     x = [];
     values = [];
-    for (let elem in data) {
+    for (const elem in data) {
       x.push(elem);
       values.push(data[elem]);
     }
@@ -49,11 +46,11 @@ export default function grafCovid(dataObj, word) {
     data = dataObj[arrData[index]];
     x = [];
     values = [];
-    for (let elem in data) {
+    for (const elem in data) {
       x.push(elem);
       values.push(data[elem]);
     }
-    let newValues = [];
+    const newValues = [];
 
     for (let i = 1; i < values.length; i += 1) {
       newValues[i] = values[i] - values[i - 1];
@@ -65,11 +62,8 @@ export default function grafCovid(dataObj, word) {
     values = newValues;
   }
 
-
   cumulativeHandler();
   createGraph();
-
-
 
   function buttonHandler() {
     document.querySelector('#myChart').innerHTML = '';
@@ -92,16 +86,14 @@ export default function grafCovid(dataObj, word) {
 
     if (index > 2) {
       dailyHandler();
-    }
-    else {
+    } else {
       cumulativeHandler();
     }
 
     createGraph();
   }
 
-  buttons.forEach(e => {
+  buttons.forEach((e) => {
     e.addEventListener('click', buttonHandler);
-  })
-
+  });
 }

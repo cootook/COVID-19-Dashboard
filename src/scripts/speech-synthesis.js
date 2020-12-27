@@ -4,11 +4,11 @@ export default function sayString(str) {
   utterance.rate = 0.5;
   utterance.lang = 'en-US';
   if (!synthesis.pending && !synthesis.speaking) {
-    synthesis.speak(utterance)
-    console.log('sayString - if', str)
+    synthesis.speak(utterance);
+    console.log('sayString - if', str);
   } else {
     synthesis.cancel();
     synthesis.speak(utterance);
-    console.log('sayString - else', str)
+    console.log('sayString - else', str);
   }
 }

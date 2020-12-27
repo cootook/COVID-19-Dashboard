@@ -1,4 +1,4 @@
-import getDataFromApiStat from './scripts/get-data-from-api-stat.js'
+import getDataFromApiStat from './scripts/get-data-from-api-stat.js';
 import dataApiDiseaseSh from './data/from-api-disease-sh.js';
 import grafCovid from './scripts/graph.js';
 import GenerateListFlagCountryCases from './scripts/generate-list-flag-country-cases.js';
@@ -14,26 +14,26 @@ import numToEnglish from './scripts/number-to-english.js';
 const mode = {
   mainInfo: ['cases', 'deaths', 'recovered'],
   timeInterval: ['all', 'today'],
-  mainAmount: ['all', 'per100K']
-}
+  mainAmount: ['all', 'per100K'],
+};
 // !!!************************************************
 
 async function mainCovid() {
   // here put functions
-  numToEnglish()
-  await getDataFromApiStat() // this must be before you take data from  {dataApiDiseaseSh}!
+  numToEnglish();
+  await getDataFromApiStat(); // this must be before you take data from  {dataApiDiseaseSh}!
 
   console.log('mainCovid --->  dataApiDiseaseSh', dataApiDiseaseSh);
 
   grafCovid(dataApiDiseaseSh, 'world');
 
   const list = new GenerateListFlagCountryCases();
-  list.appendAll()
+  list.appendAll();
 
-  const infoSection = new CasesLustUpdate()
-  infoSection.appendStatUpdate()
+  const infoSection = new CasesLustUpdate();
+  infoSection.appendStatUpdate();
 
-  new GetTable()
+  new GetTable();
   getVirtualKeyboard();
 
   // !!!************************************************
