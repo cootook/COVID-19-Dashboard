@@ -11,7 +11,8 @@
     "build": "npm run clear -s && webpack --progress",
     "lint": "eslint ./**/*.js",
     "clear": "del-cli dist",
-    "sass": "sass --watch src/scss/main.scss:src/style.css"
+    "sass": "sass --watch src/scss/main.scss:src/style.css",
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
