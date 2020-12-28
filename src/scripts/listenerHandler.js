@@ -18,8 +18,14 @@ export default class Listener {
     this.itemsList.addEventListener('click', this.graphRender.bind(this.data));
     this.itemsList.addEventListener('click', this.refreshTable);
     this.infoContainer.addEventListener('click', this.getGlobal);
-    this.switcherAllToday.addEventListener('click', GetTable.prototype.switchAllToday);
-    this.switcherAbsolutePer.addEventListener('click', GetTable.prototype.switchAbsPer);
+    this.switcherAllToday.addEventListener('click', () => {
+      currentData.isAll = !currentData.isAll;
+      GetTable.prototype.tableRefresh();
+    });
+    this.switcherAbsolutePer.addEventListener('click', () => {
+      currentData.isAbs = !currentData.isAbs;
+      GetTable.prototype.tableRefresh();
+    });
     this.table.addEventListener('click', () => {
       if (window.speechSynthesis.speaking) {
         window.speechSynthesis.cancel();

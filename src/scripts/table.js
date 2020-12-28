@@ -8,7 +8,7 @@ export default class GetTable {
     // table heading
     this.heading = document.createElement('h2');
     this.heading.classList.add('table--heading');
-    this.heading.innerText = `${this.getHeadingText()}`;
+    this.heading.innerText = `${getHeadingText()}`;
     this.heading.innerHTML += '<span class="material-icons listen-to">hearing</span>';
     this.heading.style.cursor = 'url(./assets/icons/volume.png) 4 12, auto';
 
@@ -68,7 +68,7 @@ export default class GetTable {
     this.cases.classList.add('stat--text', 'stat--text-cases');
     this.deaths.classList.add('stat--text', 'stat--text-deaths');
     this.recovered.classList.add('stat--text', 'stat--text-recovered');
-    const currentStat = this.getStat();
+    const currentStat = getStat();
     this.cases.innerText = `Cases ${currentStat[0]}`;
     this.deaths.innerText = `Deaths ${currentStat[1]}`;
     this.recovered.innerText = `Recovered ${currentStat[2]}`;
@@ -84,73 +84,65 @@ export default class GetTable {
 
   tableRefresh() {
     const table = document.querySelector('.table--heading');
-    table.innerText = this.getHeadingText();
+    table.innerText = getHeadingText();
     table.innerHTML += '<span class="material-icons listen-to">hearing</span>';
-    const currentStat = this.getStat();
+    const currentStat = getStat();
     document.querySelector('.stat--text-cases').innerText = `Cases ${currentStat[0]}`;
     document.querySelector('.stat--text-deaths').innerText = `Deaths ${currentStat[1]}`;
     document.querySelector('.stat--text-recovered').innerText = `Recovered ${currentStat[2]}`;
   }
 
-  getHeadingText() {
-    if (currentData.country === 'world') {
-      const headingWorld = 'Global statistic ';
-      GetTable.prototype.strToSpeak = headingWorld;
-      return headingWorld;
-    }
-    const headingCountry = currentData.country;
-    GetTable.prototype.strToSpeak = headingCountry;
-    return `Statistic for ${headingCountry} `;
+
+}
+
+function getHeadingText() {
+  if (currentData.country === 'world') {
+    const headingWorld = 'Global statistic ';
+    GetTable.prototype.strToSpeak = headingWorld;
+    return headingWorld;
+  }
+  const headingCountry = currentData.country;
+  GetTable.prototype.strToSpeak = headingCountry;
+  return `Statistic for ${headingCountry} `;
+}
+
+function getStat() {
+  let casesStat = null;
+  let deathsStat = null;
+  let recoveredStat = null;
+
+  let pathCases = null;
+  let pathDeaths = null;
+  let pathRecovered = null;
+
+  if (currentData.isAll) {
+    pathCases = currentData.isAbs ? 'cases' : 'casesPerOneMillion';
+    pathDeaths = currentData.isAbs ? 'deaths' : 'deathsPerOneMillion';
+    pathRecovered = currentData.isAbs ? 'recovered' : 'recoveredPerOneMillion';
+  } else {
+    pathCases = 'todayCases';
+    pathDeaths = 'todayDeaths';
+    pathRecovered = 'todayRecovered';
   }
 
-  getStat() {
-    let casesStat = null;
-    let deathsStat = null;
-    let recoveredStat = null;
-
-    let pathCases = null;
-    let pathDeaths = null;
-    let pathRecovered = null;
-
-    if (currentData.isAll) {
-      pathCases = currentData.isAbs ? 'cases' : 'casesPerOneMillion';
-      pathDeaths = currentData.isAbs ? 'deaths' : 'deathsPerOneMillion';
-      pathRecovered = currentData.isAbs ? 'recovered' : 'recoveredPerOneMillion';
-    } else {
-      pathCases = 'todayCases';
-      pathDeaths = 'todayDeaths';
-      pathRecovered = 'todayRecovered';
-    }
-
-    if (currentData.country === 'world' && currentData.isAll) {
-      casesStat = dataApiDiseaseSh.world[pathCases];
-      deathsStat = dataApiDiseaseSh.world[pathDeaths];
-      recoveredStat = dataApiDiseaseSh.world[pathRecovered];
-      GetTable.prototype.strToSpeak += ` there is ${casesStat.toEnglish()} total cases, ${deathsStat.toEnglish()} deaths and ${recoveredStat.toEnglish()} recovered.`;
-      return [casesStat, deathsStat, recoveredStat].map((x) => x.toLocaleString());
-    } if (currentData.country === 'world') {
-      const pop = dataApiDiseaseSh.world.population;
-      casesStat = (dataApiDiseaseSh.world[pathCases]);
-      deathsStat = (dataApiDiseaseSh.world[pathDeaths]);
-      recoveredStat = (dataApiDiseaseSh.world[pathRecovered]);
-      GetTable.prototype.strToSpeak += ` today there is ${casesStat.toEnglish()} cases, ${deathsStat.toEnglish()} deaths and ${recoveredStat.toEnglish()} recovered.`;
-      return [casesStat, deathsStat, recoveredStat].map((x) => x.toLocaleString());
-    }
-    const currentCountry = dataApiDiseaseSh.countries.find((x) => x.country === currentData.country);
-    casesStat = currentCountry[pathCases];
-    deathsStat = currentCountry[pathDeaths];
-    recoveredStat = currentCountry[pathRecovered];
-    GetTable.prototype.strToSpeak += ` there is ${casesStat.toEnglish()} cases, ${deathsStat.toEnglish()} deaths and ${recoveredStat.toEnglish()} recovered.`;
+  if (currentData.country === 'world' && currentData.isAll) {
+    casesStat = dataApiDiseaseSh.world[pathCases];
+    deathsStat = dataApiDiseaseSh.world[pathDeaths];
+    recoveredStat = dataApiDiseaseSh.world[pathRecovered];
+    GetTable.prototype.strToSpeak += ` there is ${casesStat.toEnglish()} total cases, ${deathsStat.toEnglish()} deaths and ${recoveredStat.toEnglish()} recovered.`;
+    return [casesStat, deathsStat, recoveredStat].map((x) => x.toLocaleString());
+  } if (currentData.country === 'world') {
+    const pop = dataApiDiseaseSh.world.population;
+    casesStat = (dataApiDiseaseSh.world[pathCases]);
+    deathsStat = (dataApiDiseaseSh.world[pathDeaths]);
+    recoveredStat = (dataApiDiseaseSh.world[pathRecovered]);
+    GetTable.prototype.strToSpeak += ` today there is ${casesStat.toEnglish()} cases, ${deathsStat.toEnglish()} deaths and ${recoveredStat.toEnglish()} recovered.`;
     return [casesStat, deathsStat, recoveredStat].map((x) => x.toLocaleString());
   }
-
-  switchAllToday(e) {
-    currentData.isAll = !currentData.isAll;
-    GetTable.prototype.tableRefresh();
-  }
-
-  switchAbsPer(e) {
-    currentData.isAbs = !currentData.isAbs;
-    GetTable.prototype.tableRefresh();
-  }
+  const currentCountry = dataApiDiseaseSh.countries.find((x) => x.country === currentData.country);
+  casesStat = currentCountry[pathCases];
+  deathsStat = currentCountry[pathDeaths];
+  recoveredStat = currentCountry[pathRecovered];
+  GetTable.prototype.strToSpeak += ` there is ${casesStat.toEnglish()} cases, ${deathsStat.toEnglish()} deaths and ${recoveredStat.toEnglish()} recovered.`;
+  return [casesStat, deathsStat, recoveredStat].map((x) => x.toLocaleString());
 }
