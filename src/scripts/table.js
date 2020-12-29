@@ -29,6 +29,7 @@ export default class GetTable {
 
     this.checkBoxAllToday.setAttribute('type', 'checkbox');
 
+
     this.switcherAllToday.appendChild(this.checkBoxAllToday);
     this.switcherAllToday.appendChild(this.switcherSliderAllToday);
     this.switcherAllToday.appendChild(this.switcherTextAll);
@@ -74,12 +75,14 @@ export default class GetTable {
     this.recovered.innerText = `Recovered ${currentStat[2]}`;
 
     // put the results in the section
-    this.tableSection = document.querySelector('.table-container');
+    const tableContainer = document.querySelector('.table-container')
+    this.tableSection = tableContainer === null ? document.createElement('section') : tableContainer;
     this.tableSection.appendChild(this.heading);
     this.tableSection.appendChild(this.switchersAll);
     this.tableSection.appendChild(this.cases);
     this.tableSection.appendChild(this.deaths);
     this.tableSection.appendChild(this.recovered);
+
   }
 
   tableRefresh() {
@@ -95,7 +98,7 @@ export default class GetTable {
 
 }
 
-function getHeadingText() {
+export function getHeadingText() {
   if (currentData.country === 'world') {
     const headingWorld = 'Global statistic ';
     GetTable.prototype.strToSpeak = headingWorld;
@@ -106,7 +109,9 @@ function getHeadingText() {
   return `Statistic for ${headingCountry} `;
 }
 
-function getStat() {
+export function getStat() {
+  if (dataApiDiseaseSh.world === null) return ['no data yet', 'no data yet', 'no data yet']
+
   let casesStat = null;
   let deathsStat = null;
   let recoveredStat = null;
