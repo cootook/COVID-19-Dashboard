@@ -33,7 +33,8 @@ async function mainCovid() {
   const infoSection = new CasesLustUpdate();
   infoSection.appendStatUpdate();
 
-  new GetTable();
+  const statTable = new GetTable();
+  console.log(statTable instanceof GetTable)
   getVirtualKeyboard();
 
   // !!!************************************************

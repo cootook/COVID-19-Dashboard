@@ -1,22 +1,3 @@
-// export default function Search() {
-//     let input = document.querySelector('.list-container--search');
-//     let itemsList = [...document.querySelector('.list-container > ul').children];
-
-//     input.addEventListener('input', function (e) {
-//         e.preventDefault();
-//         itemsList.forEach(e => {
-//             console.log(this)
-//             if (e.dataset.country.slice(0, this.value.length).toLowerCase() != this.value.toLowerCase()) {
-//                 e.style.display = 'none';
-//             }
-//             else {
-//                 e.style.display = 'flex';
-//             }
-//         });
-//     });
-
-// }
-
 export default class Search {
   constructor() {
     Search.prototype.input = document.querySelector('.list-container--search');
